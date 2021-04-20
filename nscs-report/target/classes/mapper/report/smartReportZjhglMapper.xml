@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.ZjhglDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.ZjhglDO">
+		<id column="ID" property="id" />
+		<result column="CITYNAME" property="cityname" />
+		<result column="FZ" property="fz" />
+		<result column="FZ1" property="fz1" />
+		<result column="FM" property="fm" />
+		<result column="ZJHGL" property="zjhgl" />
+		<result column="ZJHGL1" property="zjhgl1" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATETIME" property="createtime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITYNAME,
+    	FZ,
+    	FZ1,
+    	FM,
+    	ZJHGL,
+    	ZJHGL1,
+    	TIMEDATE,
+    	CREATETIME
+    </sql>
+
+	<select id="getSmartZjhgl" resultType="com.inspur.nscs.report.domain.ZjhglDO">
+		select total.cityname,
+            total.fz1,
+            total.fz,
+            total.fm,
+            to_char(nvl(round(total.fz1 * 100/nullif(total.fm,0),2),0),'990.00')||'%' zjhgl1,
+            to_char(nvl(round(total.fz * 100/nullif(total.fm,0),2),0),'990.00')||'%' zjhgl
+            from(select
+            cityname,
+            sum(fz) fz,
+            sum(fm) fm,
+            sum(fz1) fz1
+            from u_smart_report_zjhgl
+            ${ew.customSqlSegment}
+            group by cityname)total
+            ORDER BY decode(cityname,
+                             '全省',
+                             15,
+                             '长沙',
+                             1,
+                             '株洲',
+                             3,
+                             '湘潭',
+                             2,
+                             '衡阳',
+                             4,
+                             '郴州',
+                             5,
+                             '常德',
+                             6,
+                             '益阳',
+                             7,
+                             '娄底',
+                             8,
+                             '邵阳',
+                             9,
+                             '岳阳',
+                             10,
+                             '自治州',
+                             11,
+                             '张家界',
+                             12,
+                             '怀化',
+                             13,
+                             '永州',
+                             14)
+	</select>
+</mapper>

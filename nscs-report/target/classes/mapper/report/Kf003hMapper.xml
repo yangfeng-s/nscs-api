@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.Kf003hDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.Kf003hDO">
+		<id column="ID" property="id" />
+		<result column="WORKFORM_ID" property="workformId" />
+		<result column="SECONDARY_CONFIRMATION" property="secondaryConfirmation" />
+		<result column="SECONDARY_CONFIRMATION_1" property="secondaryConfirmation1" />
+		<result column="SECONDARY_CONFIRMATION_2" property="secondaryConfirmation2" />
+		<result column="SECONDARY_CONFIRMATION_3" property="secondaryConfirmation3" />
+		<result column="SECONDARY_CONFIRMATION_4" property="secondaryConfirmation4" />
+		<result column="SECONDARY_CONFIRMATION_5" property="secondaryConfirmation5" />
+		<result column="SECONDARY_CONFIRMATION_6" property="secondaryConfirmation6" />
+		<result column="SECONDARY_CONFIRMATION_7" property="secondaryConfirmation7" />
+		<result column="REQUEST_ID" property="requestId" />
+		<result column="ORIGIN_TIME" property="originTime" />
+		<result column="ACCEPT_PHONE_CODE" property="acceptPhoneCode" />
+		<result column="ACCEPT_EPARCHY_CODE" property="acceptEparchyCode" />
+		<result column="BRAND_CODE" property="brandCode" />
+		<result column="APPEAL_CHANNEL_CODE" property="appealChannelCode" />
+		<result column="CONTENT" property="content" />
+		<result column="CUST_SATISFY" property="custSatisfy" />
+		<result column="DUTY_DEPART" property="dutyDepart" />
+		<result column="DUTY_REASON" property="dutyReason" />
+		<result column="WORKFORM_STATE" property="workformState" />
+		<result column="FINISH_TIME" property="finishTime" />
+		<result column="CHAIN_ADVICE" property="chainAdvice" />
+		<result column="FEEDBACK_ADVICE" property="feedbackAdvice" />
+		<result column="SP_ENTERPRISE_INFO" property="spEnterpriseInfo" />
+		<result column="RESPONDSABLE_FIELD" property="respondsableField" />
+		<result column="TSZR_CITY" property="tszrCity" />
+		<result column="IS_REPEAT" property="isRepeat" />
+		<result column="REPEAT_TIMES" property="repeatTimes" />
+		<result column="INSERT_TIME" property="insertTime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	WORKFORM_ID,
+    	SECONDARY_CONFIRMATION,
+    	SECONDARY_CONFIRMATION_1,
+    	SECONDARY_CONFIRMATION_2,
+    	SECONDARY_CONFIRMATION_3,
+    	SECONDARY_CONFIRMATION_4,
+    	SECONDARY_CONFIRMATION_5,
+    	SECONDARY_CONFIRMATION_6,
+    	SECONDARY_CONFIRMATION_7,
+    	REQUEST_ID,
+    	ORIGIN_TIME,
+    	ACCEPT_PHONE_CODE,
+    	ACCEPT_EPARCHY_CODE,
+    	BRAND_CODE,
+    	APPEAL_CHANNEL_CODE,
+    	CONTENT,
+    	CUST_SATISFY,
+    	DUTY_DEPART,
+    	DUTY_REASON,
+    	WORKFORM_STATE,
+    	FINISH_TIME,
+    	CHAIN_ADVICE,
+    	FEEDBACK_ADVICE,
+    	SP_ENTERPRISE_INFO,
+    	RESPONDSABLE_FIELD,
+    	TSZR_CITY,
+    	IS_REPEAT,
+    	REPEAT_TIMES,
+    	INSERT_TIME
+    </sql>
+</mapper>

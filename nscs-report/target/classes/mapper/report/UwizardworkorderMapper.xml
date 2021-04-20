@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.UwizardworkorderDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.UwizardworkorderDO">
+		<id column="ID" property="id" />
+		<result column="MOBILE" property="mobile" />
+		<result column="BREAKTIME" property="breaktime" />
+		<result column="CITY" property="city" />
+		<result column="COUNTY" property="county" />
+		<result column="BREAKLOC" property="breakloc" />
+		<result column="SMX" property="smx" />
+		<result column="SMY" property="smy" />
+		<result column="BREAKID" property="breakid" />
+		<result column="SCENE" property="scene" />
+		<result column="CONTENT" property="content" />
+		<result column="CUSTGRADE" property="custgrade" />
+		<result column="CUSTTOP" property="custtop" />
+		<result column="ISREPEAT" property="isrepeat" />
+		<result column="ISSENDED" property="issended" />
+		<result column="REASON" property="reason" />
+		<result column="MSGINFO" property="msginfo" />
+		<result column="SUGGESTION" property="suggestion" />
+		<result column="ISBUILD" property="isbuild" />
+		<result column="CREATTIME" property="creattime" />
+		<result column="SR_TYPE_ID" property="srTypeId" />
+		<result column="STAFFID" property="staffid" />
+		<result column="DEPT_ID" property="deptId" />
+		<result column="CALL_ID" property="callId" />
+		<result column="CLEAR_FLAG" property="clearFlag" />
+		<result column="MOBILE_BRAND" property="mobileBrand" />
+		<result column="IMEI" property="imei" />
+		<result column="INFO_NO" property="infoNo" />
+		<result column="INFO_TITLE" property="infoTitle" />
+		<result column="TOUSU_AREA" property="tousuArea" />
+		<result column="BUSI_TYPE" property="busiType" />
+		<result column="BUSI_NAME" property="busiName" />
+		<result column="TOUSU_TYPE" property="tousuType" />
+		<result column="IS_KEY_PERSON" property="isKeyPerson" />
+		<result column="HF_RESULT" property="hfResult" />
+		<result column="HF_TIME" property="hfTime" />
+		<result column="CRMNO" property="crmno" />
+		<result column="GRID_NAME" property="gridName" />
+		<result column="UUID_FLAG" property="uuidFlag" />
+		<result column="SAVE_RESULT" property="saveResult" />
+		<result column="SAVE_RESULT_TYPE" property="saveResultType" />
+		<result column="IS_REVISIT" property="isRevisit" />
+		<result column="IS_APPLIED" property="isApplied" />
+		<result column="APPLY_OUT" property="applyOut" />
+		<result column="OUT_REASON" property="outReason" />
+		<result column="CITY_OUT" property="cityOut" />
+		<result column="PROV_OUT" property="provOut" />
+		<result column="REPEAT_CITY" property="repeatCity" />
+		<result column="REPEAT_BREAKLOC" property="repeatBreakloc" />
+		<result column="REPEAT_DISTANCE" property="repeatDistance" />
+		<result column="CLEAR_FLAG1" property="clearFlag1" />
+		<result column="NOT_MOBILE_DUTY" property="notMobileDuty" />
+		<result column="REPEAT_INTERVAL" property="repeatInterval" />
+		<result column="ISHF" property="ishf" />
+		<result column="URL" property="url" />
+		<result column="SPEED" property="speed" />
+		<result column="STEPBUSIRECORDSTRING" property="stepbusirecordstring" />
+		<result column="STEPNETRECORDSTRING" property="stepnetrecordstring" />
+		<result column="BELONGPROVINCE" property="belongprovince" />
+		<result column="BELONGCITY" property="belongcity" />
+		<result column="REPEATCALLINGTIMES" property="repeatcallingtimes" />
+		<result column="STARTTIME" property="starttime" />
+		<result column="CLEAR_FLAG2" property="clearFlag2" />
+		<result column="NO_OPS" property="noOps" />
+		<result column="IS_BAD_QUALITY" property="isBadQuality" />
+		<result column="IS_TROUBLE" property="isTrouble" />
+		<result column="SEQ_NO" property="seqNo" />
+		<result column="ALARM_TYPE" property="alarmType" />
+		<result column="ALARM_TITLE" property="alarmTitle" />
+		<result column="DAYTIME_CELL" property="daytimeCell" />
+		<result column="NIGHT_CELL" property="nightCell" />
+		<result column="ALARM_TIME" property="alarmTime" />
+		<result column="CHANGEPHONE" property="changephone" />
+		<result column="CHANGEPHONETIME" property="changephonetime" />
+		<result column="CHANGESIM" property="changesim" />
+		<result column="CHANGESIMTIME" property="changesimtime" />
+		<result column="IMPROVEEXPERIENCE" property="improveexperience" />
+		<result column="LOWCOVER" property="lowcover" />
+		<result column="BREAKHERE" property="breakhere" />
+		<result column="BASESTATIONNAME" property="basestationname" />
+		<result column="CURRENT_CITY" property="currentCity" />
+		<result column="MMECITY" property="mmecity" />
+		<result column="MMECOUNTY" property="mmecounty" />
+		<result column="MMELONGITUDE" property="mmelongitude" />
+		<result column="MMELATITUDE" property="mmelatitude" />
+		<result column="VERIFY_ADDRESS" property="verifyAddress" />
+		<result column="REAL_ADDRESS" property="realAddress" />
+		<result column="VERIFY_BUSI" property="verifyBusi" />
+		<result column="VERIFY_PREDEAL" property="verifyPredeal" />
+		<result column="OPERATOR" property="operator" />
+		<result column="OPERATOR_CITY" property="operatorCity" />
+		<result column="REPEAT_COUNTY" property="repeatCounty" />
+		<result column="BOSS_SUIT_LIST" property="bossSuitList" />
+		<result column="BOSS_REMAINING_SUM" property="bossRemainingSum" />
+		<result column="BOSS_REMAINING_FLOW" property="bossRemainingFlow" />
+		<result column="CALLING_INTERVAL" property="callingInterval" />
+		<result column="REPEAT_SAMEBUSI" property="repeatSamebusi" />
+		<result column="REPEAT_SAMECOUNTY" property="repeatSamecounty" />
+		<result column="INVALIDORDER" property="invalidorder" />
+		<result column="REPEAT_COUNTY_CHECK" property="repeatCountyCheck" />
+		<result column="APPNAME" property="appname" />
+		<result column="SURROUNDING" property="surrounding" />
+		<result column="SHAPE" property="shape" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	MOBILE,
+    	BREAKTIME,
+    	CITY,
+    	COUNTY,
+    	BREAKLOC,
+    	SMX,
+    	SMY,
+    	BREAKID,
+    	SCENE,
+    	CONTENT,
+    	CUSTGRADE,
+    	CUSTTOP,
+    	ISREPEAT,
+    	ISSENDED,
+    	REASON,
+    	MSGINFO,
+    	SUGGESTION,
+    	ISBUILD,
+    	CREATTIME,
+    	SR_TYPE_ID,
+    	STAFFID,
+    	DEPT_ID,
+    	CALL_ID,
+    	CLEAR_FLAG,
+    	MOBILE_BRAND,
+    	IMEI,
+    	INFO_NO,
+    	INFO_TITLE,
+    	TOUSU_AREA,
+    	BUSI_TYPE,
+    	BUSI_NAME,
+    	TOUSU_TYPE,
+    	IS_KEY_PERSON,
+    	HF_RESULT,
+    	HF_TIME,
+    	CRMNO,
+    	GRID_NAME,
+    	UUID_FLAG,
+    	SAVE_RESULT,
+    	SAVE_RESULT_TYPE,
+    	IS_REVISIT,
+    	IS_APPLIED,
+    	APPLY_OUT,
+    	OUT_REASON,
+    	CITY_OUT,
+    	PROV_OUT,
+    	REPEAT_CITY,
+    	REPEAT_BREAKLOC,
+    	REPEAT_DISTANCE,
+    	CLEAR_FLAG1,
+    	NOT_MOBILE_DUTY,
+    	REPEAT_INTERVAL,
+    	ISHF,
+    	URL,
+    	SPEED,
+    	STEPBUSIRECORDSTRING,
+    	STEPNETRECORDSTRING,
+    	BELONGPROVINCE,
+    	BELONGCITY,
+    	REPEATCALLINGTIMES,
+    	STARTTIME,
+    	CLEAR_FLAG2,
+    	NO_OPS,
+    	IS_BAD_QUALITY,
+    	IS_TROUBLE,
+    	SEQ_NO,
+    	ALARM_TYPE,
+    	ALARM_TITLE,
+    	DAYTIME_CELL,
+    	NIGHT_CELL,
+    	ALARM_TIME,
+    	CHANGEPHONE,
+    	CHANGEPHONETIME,
+    	CHANGESIM,
+    	CHANGESIMTIME,
+    	IMPROVEEXPERIENCE,
+    	LOWCOVER,
+    	BREAKHERE,
+    	BASESTATIONNAME,
+    	CURRENT_CITY,
+    	MMECITY,
+    	MMECOUNTY,
+    	MMELONGITUDE,
+    	MMELATITUDE,
+    	VERIFY_ADDRESS,
+    	REAL_ADDRESS,
+    	VERIFY_BUSI,
+    	VERIFY_PREDEAL,
+    	OPERATOR,
+    	OPERATOR_CITY,
+    	REPEAT_COUNTY,
+    	BOSS_SUIT_LIST,
+    	BOSS_REMAINING_SUM,
+    	BOSS_REMAINING_FLOW,
+    	CALLING_INTERVAL,
+    	REPEAT_SAMEBUSI,
+    	REPEAT_SAMECOUNTY,
+    	INVALIDORDER,
+    	REPEAT_COUNTY_CHECK,
+    	APPNAME,
+    	SURROUNDING,
+    	SHAPE
+    </sql>
+</mapper>

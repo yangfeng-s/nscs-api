@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.RbjjlDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.RbjjlDO">
+		<id column="ID" property="id" />
+		<result column="CITYNAME" property="cityname" />
+		<result column="DRYJJ" property="dryjj" />
+		<result column="DRWJJ" property="drwjj" />
+		<result column="DRWCL" property="drwcl" />
+		<result column="DRYCL" property="drycl" />
+		<result column="SHJJGQ" property="shjjgq" />
+		<result column="JDJJGQ" property="jdjjgq" />
+		<result column="SUMM" property="summ" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATTIME" property="creattime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITYNAME,
+    	DRYJJ,
+    	DRWJJ,
+    	DRWCL,
+    	DRYCL,
+    	SHJJGQ,
+    	JDJJGQ,
+    	SUMM,
+    	TIMEDATE,
+    	CREATTIME
+    </sql>
+
+	<select id="getSmartRbjjl" resultType="com.inspur.nscs.report.domain.RbjjlDO">
+		select cityname,
+             sum(drwjj) drwjj,
+             sum(dryjj) dryjj,
+             sum(summ) summ,
+             sum(drwcl) drwcl,
+             sum(drycl) drycl,
+             sum(shjjgq) shjjgq,
+             sum(jdjjgq) jdjjgq
+             from u_smart_report_rbjjl
+             ${ew.customSqlSegment}
+             group by cityname
+             ORDER BY decode(cityname,
+
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14,
+                              '全省',
+                              15)
+	</select>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inspur.nscs.demo.dao.UWizardWorkorderMapper">
+  <resultMap id="BaseResultMap" type="com.inspur.nscs.demo.domain.UWizardWorkorder">
+    <!--@mbg.generated-->
+    <!--@Table U_WIZARD_WORKORDER-->
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="BREAKTIME" jdbcType="TIMESTAMP" property="breaktime" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="BREAKLOC" jdbcType="VARCHAR" property="breakloc" />
+    <result column="SMX" jdbcType="VARCHAR" property="smx" />
+    <result column="SMY" jdbcType="VARCHAR" property="smy" />
+    <result column="BREAKID" jdbcType="DECIMAL" property="breakid" />
+    <result column="SCENE" jdbcType="VARCHAR" property="scene" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="CUSTGRADE" jdbcType="VARCHAR" property="custgrade" />
+    <result column="CUSTTOP" jdbcType="VARCHAR" property="custtop" />
+    <result column="ISREPEAT" jdbcType="VARCHAR" property="isrepeat" />
+    <result column="ISSENDED" jdbcType="VARCHAR" property="issended" />
+    <result column="REASON" jdbcType="VARCHAR" property="reason" />
+    <result column="MSGINFO" jdbcType="VARCHAR" property="msginfo" />
+    <result column="SUGGESTION" jdbcType="VARCHAR" property="suggestion" />
+    <result column="ISBUILD" jdbcType="VARCHAR" property="isbuild" />
+    <result column="CREATTIME" jdbcType="TIMESTAMP" property="creattime" />
+    <result column="SR_TYPE_ID" jdbcType="VARCHAR" property="srTypeId" />
+    <result column="STAFFID" jdbcType="VARCHAR" property="staffid" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="deptId" />
+    <result column="CALL_ID" jdbcType="VARCHAR" property="callId" />
+    <result column="CLEAR_FLAG" jdbcType="VARCHAR" property="clearFlag" />
+    <result column="MOBILE_BRAND" jdbcType="VARCHAR" property="mobileBrand" />
+    <result column="IMEI" jdbcType="VARCHAR" property="imei" />
+    <result column="INFO_NO" jdbcType="VARCHAR" property="infoNo" />
+    <result column="INFO_TITLE" jdbcType="VARCHAR" property="infoTitle" />
+    <result column="TOUSU_AREA" jdbcType="VARCHAR" property="tousuArea" />
+    <result column="BUSI_TYPE" jdbcType="VARCHAR" property="busiType" />
+    <result column="BUSI_NAME" jdbcType="VARCHAR" property="busiName" />
+    <result column="TOUSU_TYPE" jdbcType="VARCHAR" property="tousuType" />
+    <result column="IS_KEY_PERSON" jdbcType="VARCHAR" property="isKeyPerson" />
+    <result column="HF_RESULT" jdbcType="VARCHAR" property="hfResult" />
+    <result column="HF_TIME" jdbcType="TIMESTAMP" property="hfTime" />
+    <result column="CRMNO" jdbcType="VARCHAR" property="crmno" />
+    <result column="GRID_NAME" jdbcType="VARCHAR" property="gridName" />
+    <result column="UUID_FLAG" jdbcType="VARCHAR" property="uuidFlag" />
+    <result column="SAVE_RESULT" jdbcType="VARCHAR" property="saveResult" />
+    <result column="SAVE_RESULT_TYPE" jdbcType="VARCHAR" property="saveResultType" />
+    <result column="IS_REVISIT" jdbcType="VARCHAR" property="isRevisit" />
+    <result column="IS_APPLIED" jdbcType="DECIMAL" property="isApplied" />
+    <result column="APPLY_OUT" jdbcType="VARCHAR" property="applyOut" />
+    <result column="OUT_REASON" jdbcType="VARCHAR" property="outReason" />
+    <result column="CITY_OUT" jdbcType="VARCHAR" property="cityOut" />
+    <result column="PROV_OUT" jdbcType="VARCHAR" property="provOut" />
+    <result column="REPEAT_CITY" jdbcType="DECIMAL" property="repeatCity" />
+    <result column="REPEAT_BREAKLOC" jdbcType="DECIMAL" property="repeatBreakloc" />
+    <result column="REPEAT_DISTANCE" jdbcType="DECIMAL" property="repeatDistance" />
+    <result column="CLEAR_FLAG1" jdbcType="VARCHAR" property="clearFlag1" />
+    <result column="NOT_MOBILE_DUTY" jdbcType="VARCHAR" property="notMobileDuty" />
+    <result column="REPEAT_INTERVAL" jdbcType="VARCHAR" property="repeatInterval" />
+    <result column="ISHF" jdbcType="VARCHAR" property="ishf" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="SPEED" jdbcType="VARCHAR" property="speed" />
+    <result column="STEPBUSIRECORDSTRING" jdbcType="VARCHAR" property="stepbusirecordstring" />
+    <result column="STEPNETRECORDSTRING" jdbcType="VARCHAR" property="stepnetrecordstring" />
+    <result column="BELONGPROVINCE" jdbcType="VARCHAR" property="belongprovince" />
+    <result column="BELONGCITY" jdbcType="VARCHAR" property="belongcity" />
+    <result column="REPEATCALLINGTIMES" jdbcType="VARCHAR" property="repeatcallingtimes" />
+    <result column="STARTTIME" jdbcType="VARCHAR" property="starttime" />
+    <result column="CLEAR_FLAG2" jdbcType="VARCHAR" property="clearFlag2" />
+    <result column="NO_OPS" jdbcType="VARCHAR" property="noOps" />
+    <result column="IS_BAD_QUALITY" jdbcType="VARCHAR" property="isBadQuality" />
+    <result column="IS_TROUBLE" jdbcType="VARCHAR" property="isTrouble" />
+    <result column="SEQ_NO" jdbcType="VARCHAR" property="seqNo" />
+    <result column="ALARM_TYPE" jdbcType="VARCHAR" property="alarmType" />
+    <result column="ALARM_TITLE" jdbcType="VARCHAR" property="alarmTitle" />
+    <result column="DAYTIME_CELL" jdbcType="VARCHAR" property="daytimeCell" />
+    <result column="NIGHT_CELL" jdbcType="VARCHAR" property="nightCell" />
+    <result column="ALARM_TIME" jdbcType="TIMESTAMP" property="alarmTime" />
+    <result column="CHANGEPHONE" jdbcType="VARCHAR" property="changephone" />
+    <result column="CHANGEPHONETIME" jdbcType="TIMESTAMP" property="changephonetime" />
+    <result column="CHANGESIM" jdbcType="VARCHAR" property="changesim" />
+    <result column="CHANGESIMTIME" jdbcType="TIMESTAMP" property="changesimtime" />
+    <result column="IMPROVEEXPERIENCE" jdbcType="VARCHAR" property="improveexperience" />
+    <result column="LOWCOVER" jdbcType="VARCHAR" property="lowcover" />
+    <result column="BREAKHERE" jdbcType="VARCHAR" property="breakhere" />
+    <result column="BASESTATIONNAME" jdbcType="VARCHAR" property="basestationname" />
+    <result column="CURRENT_CITY" jdbcType="VARCHAR" property="currentCity" />
+    <result column="MMECITY" jdbcType="VARCHAR" property="mmecity" />
+    <result column="MMECOUNTY" jdbcType="VARCHAR" property="mmecounty" />
+    <result column="MMELONGITUDE" jdbcType="VARCHAR" property="mmelongitude" />
+    <result column="MMELATITUDE" jdbcType="VARCHAR" property="mmelatitude" />
+    <result column="GRID_ID_100" jdbcType="VARCHAR" property="gridId100" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, MOBILE, BREAKTIME, CITY, COUNTY, BREAKLOC, SMX, SMY, BREAKID, SCENE, CONTENT, 
+    CUSTGRADE, CUSTTOP, ISREPEAT, ISSENDED, REASON, MSGINFO, SUGGESTION, ISBUILD, CREATTIME, 
+    SR_TYPE_ID, STAFFID, DEPT_ID, CALL_ID, CLEAR_FLAG, MOBILE_BRAND, IMEI, INFO_NO, INFO_TITLE, 
+    TOUSU_AREA, BUSI_TYPE, BUSI_NAME, TOUSU_TYPE, IS_KEY_PERSON, HF_RESULT, HF_TIME, 
+    CRMNO, GRID_NAME, UUID_FLAG, SAVE_RESULT, SAVE_RESULT_TYPE, IS_REVISIT, IS_APPLIED, 
+    APPLY_OUT, OUT_REASON, CITY_OUT, PROV_OUT, REPEAT_CITY, REPEAT_BREAKLOC, REPEAT_DISTANCE, 
+    CLEAR_FLAG1, NOT_MOBILE_DUTY, REPEAT_INTERVAL, ISHF, URL, SPEED, STEPBUSIRECORDSTRING, 
+    STEPNETRECORDSTRING, BELONGPROVINCE, BELONGCITY, REPEATCALLINGTIMES, STARTTIME, CLEAR_FLAG2, 
+    NO_OPS, IS_BAD_QUALITY, IS_TROUBLE, SEQ_NO, ALARM_TYPE, ALARM_TITLE, DAYTIME_CELL, 
+    NIGHT_CELL, ALARM_TIME, CHANGEPHONE, CHANGEPHONETIME, CHANGESIM, CHANGESIMTIME, IMPROVEEXPERIENCE, 
+    LOWCOVER, BREAKHERE, BASESTATIONNAME, CURRENT_CITY, MMECITY, MMECOUNTY, MMELONGITUDE, 
+    MMELATITUDE, GRID_ID_100
+  </sql>
+</mapper>

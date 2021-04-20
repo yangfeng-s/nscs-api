@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.SlswjtzbDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.SlswjtzbDO">
+		<id column="ID" property="id" />
+		<result column="CITY" property="city" />
+		<result column="MOBILEG" property="mobileg" />
+		<result column="MOBILEGRATE" property="mobilegrate" />
+		<result column="FORTHG" property="forthg" />
+		<result column="FORTHGRATE" property="forthgrate" />
+		<result column="VOLTEG" property="volteg" />
+		<result column="VOLTEGRATE" property="voltegrate" />
+		<result column="MOBILEN" property="mobilen" />
+		<result column="FORTHNRATE" property="forthnrate" />
+		<result column="FORTHN" property="forthn" />
+		<result column="VOLTENRATE" property="voltenrate" />
+		<result column="VOLTEN" property="volten" />
+		<result column="MOBILENRATE" property="mobilenrate" />
+		<result column="AVAL" property="aval" />
+		<result column="ATOTAL" property="atotal" />
+		<result column="YDWL" property="ydwl" />
+		<result column="BVAL" property="bval" />
+		<result column="BTOTAL" property="btotal" />
+		<result column="FGWL" property="fgwl" />
+		<result column="CVAL" property="cval" />
+		<result column="CTOTAL" property="ctotal" />
+		<result column="JTWL" property="jtwl" />
+		<result column="DVAL" property="dval" />
+		<result column="DTOTAL" property="dtotal" />
+		<result column="JTKD" property="jtkd" />
+		<result column="XAVAL" property="xaval" />
+		<result column="XATOTAL" property="xatotal" />
+		<result column="XYDWL" property="xydwl" />
+		<result column="XBVAL" property="xbval" />
+		<result column="XBTOTAL" property="xbtotal" />
+		<result column="XFGWL" property="xfgwl" />
+		<result column="XCVAL" property="xcval" />
+		<result column="XCTOTAL" property="xctotal" />
+		<result column="XJTWL" property="xjtwl" />
+		<result column="XDVAL" property="xdval" />
+		<result column="XDTOTAL" property="xdtotal" />
+		<result column="XJTKD" property="xjtkd" />
+		<result column="TAVAL" property="taval" />
+		<result column="TATOTAL" property="tatotal" />
+		<result column="TYDWL" property="tydwl" />
+		<result column="TBVAL" property="tbval" />
+		<result column="TBTOTAL" property="tbtotal" />
+		<result column="TFGWL" property="tfgwl" />
+		<result column="TCVAL" property="tcval" />
+		<result column="TCTOTAL" property="tctotal" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="TJTWL" property="tjtwl" />
+		<result column="CREATETIME" property="createtime" />
+		<result column="TDVAL" property="tdval" />
+		<result column="TDTOTAL" property="tdtotal" />
+		<result column="TJTKD" property="tjtkd" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITY,
+    	MOBILEG,
+    	MOBILEGRATE,
+    	FORTHG,
+    	FORTHGRATE,
+    	VOLTEG,
+    	VOLTEGRATE,
+    	MOBILEN,
+    	FORTHNRATE,
+    	FORTHN,
+    	VOLTENRATE,
+    	VOLTEN,
+    	MOBILENRATE,
+    	AVAL,
+    	ATOTAL,
+    	YDWL,
+    	BVAL,
+    	BTOTAL,
+    	FGWL,
+    	CVAL,
+    	CTOTAL,
+    	JTWL,
+    	DVAL,
+    	DTOTAL,
+    	JTKD,
+    	XAVAL,
+    	XATOTAL,
+    	XYDWL,
+    	XBVAL,
+    	XBTOTAL,
+    	XFGWL,
+    	XCVAL,
+    	XCTOTAL,
+    	XJTWL,
+    	XDVAL,
+    	XDTOTAL,
+    	XJTKD,
+    	TAVAL,
+    	TATOTAL,
+    	TYDWL,
+    	TBVAL,
+    	TBTOTAL,
+    	TFGWL,
+    	TCVAL,
+    	TCTOTAL,
+    	TIMEDATE,
+    	TJTWL,
+    	CREATETIME,
+    	TDVAL,
+    	TDTOTAL,
+    	TJTKD
+    </sql>
+
+	<select id="getSmartSlswjtzb" resultType="com.inspur.nscs.report.domain.SlswjtzbDO" >
+		select total.city city, total.mobileg, round(total.mobileg/ydgy.index_value*10000,2) MOBILEGRATE,
+             total.FORTHG, round(total.FORTHG/fourg.index_value * 10000,2) FORTHGRATE,
+             total.VOLTEG, round(total.VOLTEG/speech.index_value * 10000,2) VOLTEGRATE,
+             total.MOBILEN, round(total.MOBILEN/ydgy.index_value * 10000,2) MOBILENRATE,
+             total.FORTHN, round(total.FORTHN/fourg.index_value * 10000,2) FORTHNRATE,
+             total.VOLTEN, round(total.VOLTEN/speech.index_value * 10000,2) VOLTENRATE,
+             nvl(total.aval,0) aval,nvl(total.atotal,0) atotal, to_char(nvl(round(total.aval * 100/nullif(total.atotal,0),2),0),'990.00')||'%' YDWL,
+             nvl(total.bval,0) bval,nvl(total.btotal,0) Btotal, to_char(nvl(round(total.bval * 100/nullif(total.btotal,0),2),0),'990.00')||'%' FGWL,
+             nvl(total.cval,0) cval,nvl(total.ctotal,0) Ctotal, to_char(nvl(round(total.cval * 100/nullif(total.ctotal,0),2),0),'990.00')||'%' JTWL,
+             nvl(total.dval,0) dval,nvl(total.dtotal,0) Dtotal, to_char(nvl(round(total.dval * 100/nullif(total.dtotal,0),2),0),'990.00')||'%' JTKD,
+             nvl(total.XAVAL,0) XAVAL,nvl(total.XATOTAL,0) XATOTAL, to_char(nvl(round(total.XAVAL * 100/nullif(total.XATOTAL,0),2),0),'990.00')||'%' XYDWL,
+             nvl(total.XBVAL,0) XBVAL,nvl(total.XBTOTAL,0) XBTOTAL, to_char(nvl(round(total.XBVAL * 100/nullif(total.XBTOTAL,0),2),0),'990.00')||'%' XFGWL,
+             nvl(total.XCVAL,0) XCVAL,nvl(total.XCTOTAL,0) XCTOTAL, to_char(nvl(round(total.XCVAL * 100/nullif(total.XCTOTAL,0),2),0),'990.00')||'%' XJTWL,
+             nvl(total.XDVAL,0) XDVAL,nvl(total.XDTOTAL,0) XDTOTAL, to_char(nvl(round(total.XDVAL * 100/nullif(total.XDTOTAL,0),2),0),'990.00')||'%' XJTKD,
+             nvl(total.TAVAL,0) TAVAL,nvl(total.TATOTAL,0) TATOTAL, to_char(nvl(round(total.TAVAL * 100/nullif(total.TATOTAL,0),2),0),'990.00')||'%' TYDWL,
+             nvl(total.TBVAL,0) TBVAL,nvl(total.TBTOTAL,0) TBTOTAL, to_char(nvl(round(total.TBVAL * 100/nullif(total.TBTOTAL,0),2),0),'990.00')||'%' TFGWL,
+             nvl(total.TCVAL,0) TCVAL,nvl(total.TCTOTAL,0) TCTOTAL, to_char(nvl(round(total.TCVAL * 100/nullif(total.TCTOTAL,0),2),0),'990.00')||'%' TJTWL,
+             nvl(total.TDVAL,0) TDVAL,nvl(total.TDTOTAL,0) TDTOTAL, to_char(nvl(round(total.TDVAL * 100/nullif(total.TDTOTAL,0),2),0),'990.00')||'%' TJTKD
+             from ( select city,
+             sum(mobileg) mobileg,
+             sum(FORTHG) FORTHG,
+             sum(VOLTEG) VOLTEG,
+             sum(MOBILEN) MOBILEN,
+             sum(FORTHN) FORTHN,
+             sum(VOLTEN) VOLTEN,
+             sum(AVAL) AVAL,sum(ATOTAL) ATOTAL,
+             sum(BVAL) BVAL,sum(BTOTAL) BTOTAL,
+             sum(CVAL) CVAL,sum(CTOTAL) CTOTAL,
+             sum(DVAL) DVAL,sum(DTOTAL) DTOTAL,
+             sum(XAVAL) XAVAL,sum(XATOTAL) XATOTAL,
+             sum(XBVAL) XBVAL,sum(XBTOTAL) XBTOTAL,
+             sum(XCVAL) XCVAL,sum(XCTOTAL) XCTOTAL,
+             sum(XDVAL) XDVAL,sum(XDTOTAL) XDTOTAL,
+             sum(TAVAL) TAVAL,sum(TATOTAL) TATOTAL,
+             sum(TBVAL) TBVAL,sum(TBTOTAL) TBTOTAL,
+             sum(TCVAL) TCVAL,sum(TCTOTAL) TCTOTAL,
+             sum(TDVAL) TDVAL,sum(TDTOTAL) TDTOTAL
+             from u_smart_report_slswjtzb
+             ${ew.customSqlSegment}
+             group by city
+             ) total left join
+             (select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+             )ydgy on total.city = ydgy.city_name
+             left join (
+             select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+             and index_type = '4G上网客户数'
+             ) fourg on total.city = fourg.city_name
+             left join(
+             select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+             and index_type = 'VOLTE注册用户数'
+             ) speech on total.city = speech.city_name
+              ORDER BY decode(city,
+                              '全省',
+                              0,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+</mapper>

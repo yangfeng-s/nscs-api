@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.CftskhDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.CftskhDO">
+		<id column="ID" property="id" />
+		<result column="CITY" property="city" />
+		<result column="MOBILEREPEATEDCOMPLAINTS" property="mobilerepeatedcomplaints" />
+		<result column="MOBILECOMPLAINTS" property="mobilecomplaints" />
+		<result column="MOBILEREPEATEDCOMPLAINTSRATE" property="mobilerepeatedcomplaintsrate" />
+		<result column="PHONEREPEATEDCOMPLAINTS" property="phonerepeatedcomplaints" />
+		<result column="PHONECOMPLAINTS" property="phonecomplaints" />
+		<result column="PHONEREPEATEDCOMPLAINTSRATE" property="phonerepeatedcomplaintsrate" />
+		<result column="VOICEREPEATEDCOMPLAINTS" property="voicerepeatedcomplaints" />
+		<result column="VOICECOMPLAINTS" property="voicecomplaints" />
+		<result column="VOICEREPEATEDCOMPLAINTSRATE" property="voicerepeatedcomplaintsrate" />
+		<result column="WANDERREPEATEDCOMPLAINTS" property="wanderrepeatedcomplaints" />
+		<result column="WANDERCOMPLAINTS" property="wandercomplaints" />
+		<result column="WANDERREPEATEDCOMPLAINTSRATE" property="wanderrepeatedcomplaintsrate" />
+		<result column="SHORTREPEATEDCOMPLAINTS" property="shortrepeatedcomplaints" />
+		<result column="SHORTCOMPLAINTS" property="shortcomplaints" />
+		<result column="SHORTREPEATEDCOMPLAINTSRATE" property="shortrepeatedcomplaintsrate" />
+		<result column="HOMEINTERNETREPEATEDCOMPLAINTS" property="homeinternetrepeatedcomplaints" />
+		<result column="CREATETIME" property="createtime" />
+		<result column="HOMEINTERNETCOMPLAINTS" property="homeinternetcomplaints" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="HOMEINTERNETREPEATEDRATE" property="homeinternetrepeatedrate" />
+		<result column="FOURGREPEATEDCOMPLAINTS" property="fourgrepeatedcomplaints" />
+		<result column="FOURGCOMPLAINTS" property="fourgcomplaints" />
+		<result column="FOURGREPEATEDCOMPLAINTSRATE" property="fourgrepeatedcomplaintsrate" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITY,
+    	MOBILEREPEATEDCOMPLAINTS,
+    	MOBILECOMPLAINTS,
+    	MOBILEREPEATEDCOMPLAINTSRATE,
+    	PHONEREPEATEDCOMPLAINTS,
+    	PHONECOMPLAINTS,
+    	PHONEREPEATEDCOMPLAINTSRATE,
+    	VOICEREPEATEDCOMPLAINTS,
+    	VOICECOMPLAINTS,
+    	VOICEREPEATEDCOMPLAINTSRATE,
+    	WANDERREPEATEDCOMPLAINTS,
+    	WANDERCOMPLAINTS,
+    	WANDERREPEATEDCOMPLAINTSRATE,
+    	SHORTREPEATEDCOMPLAINTS,
+    	SHORTCOMPLAINTS,
+    	SHORTREPEATEDCOMPLAINTSRATE,
+    	HOMEINTERNETREPEATEDCOMPLAINTS,
+    	CREATETIME,
+    	HOMEINTERNETCOMPLAINTS,
+    	TIMEDATE,
+    	HOMEINTERNETREPEATEDRATE,
+    	FOURGREPEATEDCOMPLAINTS,
+    	FOURGCOMPLAINTS,
+    	FOURGREPEATEDCOMPLAINTSRATE
+    </sql>
+
+	<select id="getSmartCftskh" resultType="com.inspur.nscs.report.domain.CftskhDO">
+		 select cfts.city,
+		   cfts.MOBILEREPEATEDCOMPLAINTS,cfts.MOBILECOMPLAINTS,to_char(nvl(round(MOBILEREPEATEDCOMPLAINTS * 100/nullif(MOBILECOMPLAINTS ,0),2),0),'90.00')||'%' MOBILEREPEATEDCOMPLAINTSRATE,
+		   cfts.PHONEREPEATEDCOMPLAINTS,cfts.PHONECOMPLAINTS,to_char(nvl(round(PHONEREPEATEDCOMPLAINTS * 100/nullif(PHONECOMPLAINTS ,0),2),0),'90.00')||'%' PHONEREPEATEDCOMPLAINTSRATE,
+		   cfts.VOICEREPEATEDCOMPLAINTS,cfts.VOICECOMPLAINTS,to_char(nvl(round(VOICEREPEATEDCOMPLAINTS * 100/nullif(VOICECOMPLAINTS ,0),2),0),'90.00')||'%' VOICEREPEATEDCOMPLAINTSRATE,
+		   cfts.WANDERREPEATEDCOMPLAINTS,cfts.WANDERCOMPLAINTS,to_char(nvl(round(WANDERREPEATEDCOMPLAINTS * 100/nullif(WANDERCOMPLAINTS ,0),2),0),'90.00')||'%' WANDERREPEATEDCOMPLAINTSRATE,
+		   cfts.SHORTREPEATEDCOMPLAINTS,cfts.SHORTCOMPLAINTS,to_char(nvl(round(SHORTREPEATEDCOMPLAINTS * 100/nullif(SHORTCOMPLAINTS ,0),2),0),'90.00')||'%' SHORTREPEATEDCOMPLAINTSRATE,
+		   cfts.HOMEINTERNETREPEATEDCOMPLAINTS,cfts.HOMEINTERNETCOMPLAINTS,to_char(nvl(round(HOMEINTERNETREPEATEDCOMPLAINTS * 100/nullif(HOMEINTERNETCOMPLAINTS ,0),2),0),'90.00')||'%' HOMEINTERNETREPEATEDRATE,
+		   cfts.FOURGCOMPLAINTS,cfts.FOURGREPEATEDCOMPLAINTS, to_char(nvl(round(FOURGCOMPLAINTS * 100/nullif(FOURGREPEATEDCOMPLAINTS ,0),2),0),'90.00')||'%' FOURGREPEATEDCOMPLAINTSRATE
+		   from ( select city,
+		   sum(MOBILEREPEATEDCOMPLAINTS) MOBILEREPEATEDCOMPLAINTS,sum(MOBILECOMPLAINTS) MOBILECOMPLAINTS,
+		   sum(PHONEREPEATEDCOMPLAINTS) PHONEREPEATEDCOMPLAINTS,sum(PHONECOMPLAINTS) PHONECOMPLAINTS,
+		   sum(VOICEREPEATEDCOMPLAINTS) VOICEREPEATEDCOMPLAINTS,sum(VOICECOMPLAINTS) VOICECOMPLAINTS,
+		   sum(WANDERREPEATEDCOMPLAINTS) WANDERREPEATEDCOMPLAINTS,sum(WANDERCOMPLAINTS) WANDERCOMPLAINTS,
+		   sum(SHORTREPEATEDCOMPLAINTS) SHORTREPEATEDCOMPLAINTS,sum(SHORTCOMPLAINTS) SHORTCOMPLAINTS,
+		   sum(HOMEINTERNETREPEATEDCOMPLAINTS) HOMEINTERNETREPEATEDCOMPLAINTS,sum(HOMEINTERNETCOMPLAINTS) HOMEINTERNETCOMPLAINTS,
+		   sum(FOURGREPEATEDCOMPLAINTS) FOURGREPEATEDCOMPLAINTS,sum(FOURGCOMPLAINTS) FOURGCOMPLAINTS
+		   from u_smart_report_cftskh
+		   ${ew.customSqlSegment}
+		   group by city ) cfts
+		   ORDER BY decode(city,'长沙',1,'株洲',3,'湘潭',2,'衡阳',
+					4,
+					'郴州',
+					5,
+					'常德',
+					6,
+					'益阳',
+					7,
+					'娄底',
+					8,
+					'邵阳',
+					9,
+					'岳阳',
+					10,
+					'自治州',
+					11,
+					'张家界',
+					12,
+					'怀化',
+					13,
+					'永州',
+					14)
+	</select>
+</mapper>

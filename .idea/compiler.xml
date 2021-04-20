@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="nscs-report" />
+        <module name="nscs-common" />
+        <module name="nscs-demo" />
+        <module name="nscs-apn" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="nscs" target="1.8" />
+      <module name="nscs-apn" target="1.8" />
+      <module name="nscs-common" target="1.8" />
+      <module name="nscs-demo" target="1.8" />
+      <module name="nscs-report" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="nscs-apn" options="-parameters" />
+      <module name="nscs-common" options="-parameters" />
+      <module name="nscs-demo" options="-parameters" />
+      <module name="nscs-report" options="-parameters" />
+    </option>
+  </component>
+</project>

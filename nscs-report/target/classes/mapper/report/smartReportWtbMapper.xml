@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.WtbDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.WtbDO">
+		<id column="ID" property="id" />
+		<result column="CITY" property="city" />
+		<result column="MOBILEGENERALIZATION" property="mobilegeneralization" />
+		<result column="MOBILEGENERALIZATIONRATE" property="mobilegeneralizationrate" />
+		<result column="MOBLIENARROW" property="moblienarrow" />
+		<result column="MOBLIENARROWRATE" property="moblienarrowrate" />
+		<result column="FOURGINTERNETGENERALIZATION" property="fourginternetgeneralization" />
+		<result column="FOURGINTERNETGENERRATE" property="fourginternetgenerrate" />
+		<result column="FOURGINTERNETNARROW" property="fourginternetnarrow" />
+		<result column="FOURGINTERNETNARROWRATE" property="fourginternetnarrowrate" />
+		<result column="VOICEGENERALIZATION" property="voicegeneralization" />
+		<result column="VOICEGENERALIZATIONRATE" property="voicegeneralizationrate" />
+		<result column="VOICENARROW" property="voicenarrow" />
+		<result column="VOICENARROWRATE" property="voicenarrowrate" />
+		<result column="HOUSEGUESTNARROW" property="houseguestnarrow" />
+		<result column="HOUSEGUESTNARROWRATE" property="houseguestnarrowrate" />
+		<result column="INTERNETGENERALIZATION" property="internetgeneralization" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATETIME" property="createtime" />
+		<result column="INTERNETGENERALIZATIONRATE" property="internetgeneralizationrate" />
+		<result column="INTERNETNARROW" property="internetnarrow" />
+		<result column="INTERNETNARROWRATE" property="internetnarrowrate" />
+		<result column="SHORTMMSGENERALIZATION" property="shortmmsgeneralization" />
+		<result column="SHORTMMSGENERALIZATIONRATE" property="shortmmsgeneralizationrate" />
+		<result column="SHORTMMSNARROW" property="shortmmsnarrow" />
+		<result column="SHORTMMSNARROWRATE" property="shortmmsnarrowrate" />
+		<result column="ROAMGENERALIZATION" property="roamgeneralization" />
+		<result column="ROAMGENERALIZATIONRATE" property="roamgeneralizationrate" />
+		<result column="ROAMNARROW" property="roamnarrow" />
+		<result column="ROAMNARROWRATE" property="roamnarrowrate" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITY,
+    	MOBILEGENERALIZATION,
+    	MOBILEGENERALIZATIONRATE,
+    	MOBLIENARROW,
+    	MOBLIENARROWRATE,
+    	FOURGINTERNETGENERALIZATION,
+    	FOURGINTERNETGENERRATE,
+    	FOURGINTERNETNARROW,
+    	FOURGINTERNETNARROWRATE,
+    	VOICEGENERALIZATION,
+    	VOICEGENERALIZATIONRATE,
+    	VOICENARROW,
+    	VOICENARROWRATE,
+    	HOUSEGUESTNARROW,
+    	HOUSEGUESTNARROWRATE,
+    	INTERNETGENERALIZATION,
+    	TIMEDATE,
+    	CREATETIME,
+    	INTERNETGENERALIZATIONRATE,
+    	INTERNETNARROW,
+    	INTERNETNARROWRATE,
+    	SHORTMMSGENERALIZATION,
+    	SHORTMMSGENERALIZATIONRATE,
+    	SHORTMMSNARROW,
+    	SHORTMMSNARROWRATE,
+    	ROAMGENERALIZATION,
+    	ROAMGENERALIZATIONRATE,
+    	ROAMNARROW,
+    	ROAMNARROWRATE
+    </sql>
+
+	<select id="getSmartReportWtb" resultType="com.inspur.nscs.report.domain.WtbDO">
+		select total.city city, total.MOBILEGENERALIZATION, round(total.MOBILEGENERALIZATION/ydgy.index_value*10000,2) MOBILEGENERALIZATIONRATE,
+             total.MOBLIENARROW, round(total.MOBLIENARROW/ydgy.index_value * 10000,2) MOBLIENARROWRATE,
+             total.FOURGINTERNETGENERALIZATION, round(total.FOURGINTERNETGENERALIZATION/fourg.index_value * 10000,2) FOURGINTERNETGENERRATE,
+             total.FOURGINTERNETNARROW, round(total.FOURGINTERNETNARROW/fourg.index_value * 10000,2) FOURGINTERNETNARROWRATE,
+             total.VOICEGENERALIZATION, round(total.VOICEGENERALIZATION/speech.index_value * 10000,2) VOICEGENERALIZATIONRATE,
+             total.VOICENARROW, round(total.VOICENARROW/speech.index_value * 10000,2) VOICENARROWRATE,
+             nvl(total.HOUSEGUESTNARROW,0) HOUSEGUESTNARROW, nvl(round(total.HOUSEGUESTNARROW/custom.index_value * 10000,2),0) HOUSEGUESTNARROWRATE,
+             total.INTERNETGENERALIZATION, round(total.INTERNETGENERALIZATION/phone.index_value * 10000,2) INTERNETGENERALIZATIONRATE,
+             total.INTERNETNARROW, round(total.INTERNETNARROW/phone.index_value * 10000,2) INTERNETNARROWRATE,
+             total.SHORTMMSGENERALIZATION, round(total.SHORTMMSGENERALIZATION/ydgy.index_value * 10000,2) SHORTMMSGENERALIZATIONRATE,
+             total.SHORTMMSNARROW, round(total.SHORTMMSNARROW/ydgy.index_value * 10000,2) SHORTMMSNARROWRATE,
+             total.ROAMGENERALIZATION, round(total.ROAMGENERALIZATION/ydgy.index_value * 10000,2) ROAMGENERALIZATIONRATE,
+             total.ROAMNARROW, round(total.ROAMNARROW/ydgy.index_value * 10000,2) ROAMNARROWRATE
+             from
+             (select city,
+             sum(MOBILEGENERALIZATION) MOBILEGENERALIZATION,
+             sum(MOBLIENARROW) MOBLIENARROW,
+             sum(FOURGINTERNETGENERALIZATION) FOURGINTERNETGENERALIZATION,
+             sum(FOURGINTERNETNARROW) FOURGINTERNETNARROW,
+             sum(VOICEGENERALIZATION) VOICEGENERALIZATION,
+             sum(VOICENARROW) VOICENARROW,
+             sum(HOUSEGUESTNARROW) HOUSEGUESTNARROW,
+             sum(INTERNETGENERALIZATION) INTERNETGENERALIZATION,
+             sum(INTERNETNARROW) INTERNETNARROW,
+             sum(SHORTMMSGENERALIZATION) SHORTMMSGENERALIZATION,
+             sum(SHORTMMSNARROW) SHORTMMSNARROW,
+             sum(ROAMGENERALIZATION) ROAMGENERALIZATION,
+             sum(ROAMNARROW) ROAMNARROW
+             from u_smart_report_wtb
+              ${ew.customSqlSegment}
+             group by city
+             ) total
+             left join
+             (select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+             )ydgy on total.city = ydgy.city_name
+             left join (
+             select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+             and index_type = '4G上网客户数'
+             ) fourg on total.city = fourg.city_name
+             left join(
+             select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+             and index_type = 'VOLTE注册用户数'
+             ) speech on total.city = speech.city_name
+             left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '家客客户数'
+              ) custom on total.city = custom.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '手机上网客户数'
+              ) phone on total.city = phone.city_name
+              ORDER BY decode(city,
+                              '全省',
+                              15,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+
+</mapper>

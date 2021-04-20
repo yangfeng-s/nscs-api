@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.demo.dao.CustomAreaSaveDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.demo.domain.CustomAreaSaveDO">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="area" property="area" />
+		<result column="length" property="length" />
+		<result column="field1" property="field1" />
+		<result column="field2" property="field2" />
+		<result column="remark" property="remark" />
+		<result column="create_user" property="createUser" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="wkt" property="wkt" />
+		<result column="geom" property="geom" />
+		<result column="city" property="city" />
+		<result column="district" property="district" />
+		<result column="scene_type" property="sceneType" />
+		<result column="lon" property="lon" />
+		<result column="lat" property="lat" />
+		<result column="scene_id" property="sceneId" />
+		<result column="area_type" property="areaType" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	name,
+    	area,
+    	length,
+    	field1,
+    	field2,
+    	remark,
+    	create_user,
+    	create_time,
+    	update_time,
+    	wkt,
+    	geom,
+    	city,
+    	district,
+    	scene_type,
+    	lon,
+    	lat,
+    	scene_id,
+    	area_type
+    </sql>
+	<insert id="insertCustomArea"  useGeneratedKeys="true" keyProperty="id">
+		insert into custom_area_save
+		(   name,
+			area,
+			length,
+			field1,
+			field2,
+			remark,
+			create_user,
+			create_time,
+			wkt,
+			geom
+		)
+
+		values
+		(
+			#{name},
+			cast(#{area} as numeric),
+			cast(#{length} as numeric),
+			#{field1},
+			#{field2},
+			#{remark},
+			#{createUser},
+			#{createTime}::timestamp ,
+			#{wkt},
+			ST_GeomFromEWKT(#{wkt})
+		)
+	</insert>
+
+	<select id="list" resultType="com.inspur.nscs.demo.domain.CustomAreaSaveDO">
+		select id,name,area,length,field1,field2,remark,create_user,create_time,update_time,wkt,geom,city,district,scene_type,lon,lat,scene_id,area_type from custom_area_save where 1=1
+		<if test="oid != null and oid != ''">
+		    and field2 = #{oid}
+        </if>
+        <if test="areaName != null and areaName != ''">
+            and name like '%${areaName}%'
+        </if>
+		<if test="offset != null and limit != null">
+            limit #{limit} offset #{offset}
+		</if>
+
+	</select>
+
+	<select id="count" resultType="int">
+		select count(1) from custom_area_save where 1=1
+		<if test="areaName != null and areaName != ''">
+             and name like '%${areaName}%'
+        </if>
+        <if test="oid != null and oid != ''">
+		    and field2 = #{oid}
+        </if>
+	</select>
+
+	<update id="updateCustomArea">
+	    update custom_area_save
+	    <set>
+			<if test="name != null">name = #{name}, </if>
+			<if test="area != null">area = cast(#{area} as numeric),</if>
+			<if test="length != null">length = cast(#{length} as numeric),</if>
+			<if test="field1 != null">field1 = #{field1},</if>
+			<if test="field2 != null">field2 = #{field2},</if>
+			<if test="remark != null">remark = #{remark},</if>
+			<if test="create_user != null">create_user = #{createUser},</if>
+			<if test="wkt != null">wkt = #{wkt},</if>
+			<if test="wkt != null">geom = ST_GeomFromEWKT(#{wkt}),</if>
+			<if test="updateTime != null">update_time = #{updateTime}::timestamp,</if>
+			<if test="createTime != null">create_time = #{createTime}::timestamp</if>
+		</set>
+		where id = #{id}
+    </update>
+    <select id="getOid" resultType="java.lang.Long">
+    select t.org_id from sso_auth.AUTH_ORG t ,sso_auth.AUTH_USER u where t.ORG_ID = u.ORG_ID and u.USER_ID=#{userid}
+
+    </select>
+
+    <select id="getAuthUsers" resultType="com.inspur.nscs.demo.domain.AuthUserDo">
+    select u.* from sso_auth.AUTH_ORG t ,sso_auth.AUTH_USER u where t.ORG_ID = u.ORG_ID and u.USER_ID=#{userid}
+</select>
+
+</mapper>

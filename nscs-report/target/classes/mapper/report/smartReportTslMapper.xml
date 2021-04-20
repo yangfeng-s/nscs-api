@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.TslDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.TslDO">
+		<id column="ID" property="id" />
+		<result column="CITY" property="city" />
+		<result column="MOBILECOMPLAINTVOLUME" property="mobilecomplaintvolume" />
+		<result column="MOBILECOMPLAINTRATE" property="mobilecomplaintrate" />
+		<result column="PHONEINTERNET" property="phoneinternet" />
+		<result column="PHONEINTERNETRATE" property="phoneinternetrate" />
+		<result column="FOURGINTERNET" property="fourginternet" />
+		<result column="FOURGINTERNETRATE" property="fourginternetrate" />
+		<result column="SPEECHQUALITY" property="speechquality" />
+		<result column="SPEECHQUALITYRATE" property="speechqualityrate" />
+		<result column="CUSTOMECOMPLAINTVOLUME" property="customecomplaintvolume" />
+		<result column="CREATETIME" property="createtime" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CUSTOMECOMPLAINTVOLUMERATE" property="customecomplaintvolumerate" />
+		<result column="WANDER" property="wander" />
+		<result column="WANDERRATE" property="wanderrate" />
+		<result column="SHORTMMS" property="shortmms" />
+		<result column="SHORTMMSRATE" property="shortmmsrate" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITY,
+    	MOBILECOMPLAINTVOLUME,
+    	MOBILECOMPLAINTRATE,
+    	PHONEINTERNET,
+    	PHONEINTERNETRATE,
+    	FOURGINTERNET,
+    	FOURGINTERNETRATE,
+    	SPEECHQUALITY,
+    	SPEECHQUALITYRATE,
+    	CUSTOMECOMPLAINTVOLUME,
+    	CREATETIME,
+    	TIMEDATE,
+    	CUSTOMECOMPLAINTVOLUMERATE,
+    	WANDER,
+    	WANDERRATE,
+    	SHORTMMS,
+    	SHORTMMSRATE
+    </sql>
+
+	<select id="getSmartReportTsl" resultType="com.inspur.nscs.report.domain.TslDO">
+		select pre.city city,pre.mobilecomplaintvolume,round(pre.mobilecomplaintvolume/suf.index_value*10000,2) mobilecomplaintrate,
+             pre.PHONEINTERNET PHONEINTERNET,round(pre.PHONEINTERNET/phone.index_value*10000,2) PHONEINTERNETrate,
+             pre.FOURGINTERNET FOURGINTERNET,round(pre.FOURGINTERNET/fourg.index_value*10000,2) FOURGINTERNETrate,
+             pre.SPEECHQUALITY SPEECHQUALITY,round(pre.SPEECHQUALITY/speech.index_value*10000,2) SPEECHQUALITYrate,
+             pre.CUSTOMECOMPLAINTVOLUME CUSTOMECOMPLAINTVOLUME,round(pre.CUSTOMECOMPLAINTVOLUME/custom.index_value*10000,2) CUSTOMECOMPLAINTVOLUMErate,
+             pre.WANDER WANDER,round(pre.WANDER/suf.index_value*10000,2) WANDERrate,
+             pre.SHORTMMS SHORTMMS,round(pre.SHORTMMS/suf.index_value*10000,2) SHORTMMSrate
+             from (
+             SELECT CITY,
+                    sum(mobilecomplaintvolume) mobilecomplaintvolume,
+                    sum(PHONEINTERNET) PHONEINTERNET,
+                    sum(FOURGINTERNET) FOURGINTERNET,
+                    sum(SPEECHQUALITY) SPEECHQUALITY,
+                    sum(CUSTOMECOMPLAINTVOLUME) CUSTOMECOMPLAINTVOLUME,
+                    sum(WANDER) WANDER,
+                    sum(SHORTMMS) SHORTMMS
+              FROM U_SMART_REPORT_TSL
+              ${ew.customSqlSegment}
+              GROUP BY city
+              ) pre
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+              )suf
+              on pre.city = suf.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '手机上网客户数'
+              ) phone on pre.city = phone.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '4G上网客户数'
+              ) fourg on pre.city = fourg.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VOLTE注册用户数'
+              ) speech on pre.city = speech.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '家客客户数'
+              ) custom on pre.city = custom.city_name
+              ORDER BY decode(city,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14,'全省',15)
+	</select>
+
+    <select id="getList" resultType="com.inspur.nscs.report.domain.TslDO">
+		select pre.city city,pre.mobilecomplaintvolume,round(pre.mobilecomplaintvolume/suf.index_value*10000,2) mobilecomplaintrate,
+             pre.PHONEINTERNET PHONEINTERNET,round(pre.PHONEINTERNET/phone.index_value*10000,2) PHONEINTERNETrate,
+             pre.FOURGINTERNET FOURGINTERNET,round(pre.FOURGINTERNET/fourg.index_value*10000,2) FOURGINTERNETrate,
+             pre.SPEECHQUALITY SPEECHQUALITY,round(pre.SPEECHQUALITY/speech.index_value*10000,2) SPEECHQUALITYrate,
+             pre.CUSTOMECOMPLAINTVOLUME CUSTOMECOMPLAINTVOLUME,round(pre.CUSTOMECOMPLAINTVOLUME/custom.index_value*10000,2) CUSTOMECOMPLAINTVOLUMErate,
+             pre.WANDER WANDER,round(pre.WANDER/suf.index_value*10000,2) WANDERrate,
+             pre.SHORTMMS SHORTMMS,round(pre.SHORTMMS/suf.index_value*10000,2) SHORTMMSrate
+             from (
+             SELECT CITY,
+                    sum(mobilecomplaintvolume) mobilecomplaintvolume,
+                    sum(PHONEINTERNET) PHONEINTERNET,
+                    sum(FOURGINTERNET) FOURGINTERNET,
+                    sum(SPEECHQUALITY) SPEECHQUALITY,
+                    sum(CUSTOMECOMPLAINTVOLUME) CUSTOMECOMPLAINTVOLUME,
+                    sum(WANDER) WANDER,
+                    sum(SHORTMMS) SHORTMMS
+              FROM U_SMART_REPORT_TSL
+              ${ew.customSqlSegment}
+              GROUP BY city
+              ) pre
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+              )suf
+              on pre.city = suf.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '手机上网客户数'
+              ) phone on pre.city = phone.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '4G上网客户数'
+              ) fourg on pre.city = fourg.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VOLTE注册用户数'
+              ) speech on pre.city = speech.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '家客客户数'
+              ) custom on pre.city = custom.city_name
+              ORDER BY decode(city,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14,'全省',15)
+	</select>
+
+
+</mapper>

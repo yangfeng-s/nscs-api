@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.ClscDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.ClscDO">
+		<id column="ID" property="id" />
+		<result column="CITYNAME" property="cityname" />
+		<result column="ZB24FZ" property="zb24fz" />
+		<result column="ZB24FM" property="zb24fm" />
+		<result column="ZB24" property="zb24" />
+		<result column="ZB25FZ" property="zb25fz" />
+		<result column="ZB25FM" property="zb25fm" />
+		<result column="ZB25" property="zb25" />
+		<result column="ZB26FZ" property="zb26fz" />
+		<result column="ZB26FM" property="zb26fm" />
+		<result column="ZB26" property="zb26" />
+		<result column="ZB27FZ" property="zb27fz" />
+		<result column="ZB27FM" property="zb27fm" />
+		<result column="ZB27" property="zb27" />
+		<result column="ST1" property="st1" />
+		<result column="SUMS" property="sums" />
+		<result column="ZB30" property="zb30" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATETIME" property="createtime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITYNAME,
+    	ZB24FZ,
+    	ZB24FM,
+    	ZB24,
+    	ZB25FZ,
+    	ZB25FM,
+    	ZB25,
+    	ZB26FZ,
+    	ZB26FM,
+    	ZB26,
+    	ZB27FZ,
+    	ZB27FM,
+    	ZB27,
+    	ST1,
+    	SUMS,
+    	ZB30,
+    	TIMEDATE,
+    	CREATETIME
+    </sql>
+
+	<select id="getSmartClsc" resultType="com.inspur.nscs.report.domain.ClscDO">
+		select total.cityname,
+             total.zb24fz,total.zb24fm, nvl(round(total.zb24fz/nullif(total.zb24fm,0),2),0) zb24,
+             total.zb25fz,total.zb25fm, nvl(round(total.zb25fz/nullif(total.zb25fm,0),2),0) zb25,
+             total.zb26fz,total.zb26fm, nvl(round(total.zb26fz /nullif(total.zb26fm,0),2),0) zb26,
+             total.zb27fz,total.zb27fm, nvl(round(total.zb27fz /nullif(total.zb27fm,0),2),0) zb27,
+             total.st1,total.sums, nvl(round(total.st1/nullif(total.sums,0),2),0) zb30
+             from (select cityname,
+             sum(zb24) zb24,
+             sum(zb25) zb25,
+             sum(zb26) zb26,
+             sum(zb27) zb27,
+             nvl(sum(zb30),0) zb30,
+             sum(zb27fz) zb27fz,
+             sum(zb27fm) zb27fm,
+             sum(zb26fz) zb26fz,
+             sum(zb26fm) zb26fm,
+             sum(zb25fz) zb25fz,
+             sum(zb25fm) zb25fm,
+             sum(zb24fz) zb24fz,
+             sum(zb24fm) zb24fm,
+             nvl(sum(st1),0) st1,
+             sum(sums) sums
+             from u_smart_report_clsc
+              ${ew.customSqlSegment}
+             group by cityname ) total
+             ORDER BY decode(cityname,
+                              '全省',
+                              15,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+</mapper>

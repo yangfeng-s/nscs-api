@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.demo.dao.PlTaskManageDao">
+    <resultMap id="BaseResultMap" type="com.inspur.nscs.demo.domain.PlTaskManageDO">
+        <id column="TASK_ID" property="taskId"/>
+        <result column="CITY_ID" property="cityId"/>
+        <result column="TASK_NAME" property="taskName"/>
+        <result column="POLICY_NAME" property="policyName"/>
+        <result column="PRJ_DURATION" property="prjDuration"/>
+        <result column="NET_TYPE" property="netType"/>
+        <result column="PLAN_COUNT" property="planCount"/>
+        <result column="CREATE_COUNT" property="createCount"/>
+        <result column="EXCUTE_RESULT" property="excuteResult"/>
+        <result column="CREATE_USER" property="createUser"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="DISTRICT_ID" property="districtId"/>
+        <result column="AREA_TYPE" property="areaType"/>
+        <result column="REMARK" property="remark"/>
+        <result column="CUSTOM_EXTENT" property="customExtent"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    	CITY_ID,
+    	TASK_NAME,
+    	POLICY_NAME,
+    	PRJ_DURATION,
+    	NET_TYPE,
+    	PLAN_COUNT,
+    	CREATE_COUNT,
+    	EXCUTE_RESULT,
+    	CREATE_USER,
+    	CREATE_TIME,
+    	DISTRICT_ID,
+    	AREA_TYPE,
+    	REMARK,
+    	CUSTOM_EXTENT
+    </sql>
+    <select id="findMaxNo" resultType="String">
+		select  replace(lpad(max(no)+1,7),' ','0')  from (
+  select substr(TASK_ID,instr(TASK_ID,'-',1,2)+1) as no,substr(TASK_ID,instr(TASK_ID,'-',1,1)+1,instr(TASK_ID,'-',1,2)-1-instr(TASK_ID,'-',1,1)) as city,TASK_ID as task_id from PL_TASK_MANAGE
+  where 1=1 and instr(TASK_ID,'-',1,2)>1 and  substr(TASK_ID,instr(TASK_ID,'-',1,1)+1,instr(TASK_ID,'-',1,2)-1-instr(TASK_ID,'-',1,1))=#{abName}) tb
+	</select>
+    <select id="getGisDateByCity" >
+    </select>
+    <select id="getEnodbByExtent" >
+    <!--select *  from PL_4G_ENODB_CONFIG t where ST_intersects( st_setsrid(st_geomFromEwkt(#{customExtent}	),4326),t.geom) -->
+        insert into CO_SITE_CUSTOM (CO_SITE_RELATED_ENB,RELATED_ENB,CO_SITE_LONGITUDE,CO_SITE_LATITUDE,TASK_ID)          SELECT CO_SITE_RELATED_ENB,RELATED_ENB,CO_SITE_LONGITUDE,CO_SITE_LATITUDE,#{taskId} as TASK_ID
+        FROM CO_SITE c
+        WHERE
+        sdo_relate(c.location,sdo_geometry(#{customExtent},4326),'MASK=Anyinteract') = 'TRUE'
+    </select>
+    <select id="getEnodbByCityId">
+        select *  from PL_4G_ENODB_CONFIG t where city_id=#{cityId}
+    </select>
+    <select id="delEnodbByTaskId">
+        delete  from CO_SITE_CUSTOM where  TASK_ID=#{taskId}
+    </select>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.JjlDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.JjlDO">
+		<id column="ID" property="id" />
+		<result column="CITYNAME" property="cityname" />
+		<result column="DYJJL" property="dyjjl" />
+		<result column="DYZL" property="dyzl" />
+		<result column="DYTSJJL" property="dytsjjl" />
+		<result column="SHJJL" property="shjjl" />
+		<result column="ZL" property="zl" />
+		<result column="ZB48" property="zb48" />
+		<result column="NITZL" property="nitzl" />
+		<result column="NZL" property="nzl" />
+		<result column="NIT" property="nit" />
+		<result column="NTY" property="nty" />
+		<result column="ZLL" property="zll" />
+		<result column="NTYL" property="ntyl" />
+		<result column="II" property="ii" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATETIME" property="createtime" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITYNAME,
+    	DYJJL,
+    	DYZL,
+    	DYTSJJL,
+    	SHJJL,
+    	ZL,
+    	ZB48,
+    	NITZL,
+    	NZL,
+    	NIT,
+    	NTY,
+    	ZLL,
+    	NTYL,
+    	II,
+    	TIMEDATE,
+    	CREATETIME
+    </sql>
+
+	<select id="getSmartJjl" resultType="com.inspur.nscs.report.domain.JjlDO">
+		select total.cityname, total.shjjl,total.zl, to_char(nvl(round(total.shjjl * 100/nullif(total.zl,0),2),0),'990.00')||'%' zb48,
+             total.nty,total.zll,to_char(nvl(round(total.nty * 100/nullif(total.zll,0),2),0),'990.00')||'%' ntyl,
+             total.dyjjl,total.dyzl,to_char(nvl(round(total.dyjjl * 100/nullif(total.dyzl,0),2),0),'990.00')||'%' dytsjjl,
+             total.nitzl,total.nzl,to_char(nvl(round(total.nitzl * 100/nullif(total.nzl,0),2),0),'990.00')||'%' nit
+             from ( select cityname,
+             sum(shjjl) shjjl,sum(zl) zl,
+             sum(nty) nty,sum(zll) zll,
+             nvl(sum(dyjjl),0) dyjjl, nvl(sum(dyzl),0) dyzl,
+             sum(nitzl) nitzl, sum(nzl) nzl
+             from u_smart_report_jjl
+             ${ew.customSqlSegment}
+             group by cityname
+             ) total
+             ORDER BY decode(cityname,
+                              '全省',
+                              15,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+</mapper>

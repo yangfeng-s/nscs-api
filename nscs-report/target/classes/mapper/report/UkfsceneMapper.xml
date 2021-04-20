@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.UkfsceneDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.UkfsceneDO">
+		<id column="ID" property="id" />
+		<result column="DATENUM" property="datenum" />
+		<result column="PROVID" property="provid" />
+		<result column="PROV" property="prov" />
+		<result column="CITY" property="city" />
+		<result column="MOBLE" property="moble" />
+		<result column="CUSTLEVEL" property="custlevel" />
+		<result column="ORDERID" property="orderid" />
+		<result column="BUSI" property="busi" />
+		<result column="STAFFID" property="staffid" />
+		<result column="CREATTIME" property="creattime" />
+		<result column="COONTENT" property="coontent" />
+		<result column="REPLYID" property="replyid" />
+		<result column="FILEID" property="fileid" />
+		<result column="REPLYGROUPID" property="replygroupid" />
+		<result column="FILEREASON" property="filereason" />
+		<result column="DEALRESULT" property="dealresult" />
+		<result column="DEALDURATION" property="dealduration" />
+		<result column="SMS" property="sms" />
+		<result column="WAY" property="way" />
+		<result column="REPLYTIME" property="replytime" />
+		<result column="SEND" property="send" />
+		<result column="SATISRATE" property="satisrate" />
+		<result column="ISDEAL" property="isdeal" />
+		<result column="ISDEALDURATION" property="isdealduration" />
+		<result column="OTHER" property="other" />
+		<result column="FILEGROUPID" property="filegroupid" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	DATENUM,
+    	PROVID,
+    	PROV,
+    	CITY,
+    	MOBLE,
+    	CUSTLEVEL,
+    	ORDERID,
+    	BUSI,
+    	STAFFID,
+    	CREATTIME,
+    	COONTENT,
+    	REPLYID,
+    	FILEID,
+    	REPLYGROUPID,
+    	FILEREASON,
+    	DEALRESULT,
+    	DEALDURATION,
+    	SMS,
+    	WAY,
+    	REPLYTIME,
+    	SEND,
+    	SATISRATE,
+    	ISDEAL,
+    	ISDEALDURATION,
+    	OTHER,
+    	FILEGROUPID
+    </sql>
+</mapper>

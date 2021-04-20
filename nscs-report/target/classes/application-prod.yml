@@ -1,0 +1,65 @@
+## 生产环境配置==开发环境和生产环境不同的配置写在这里==
+server:
+  port: 8003
+
+spring:
+  cloud:
+    # nacos 服务注册与发现
+    nacos:
+      discovery:
+        server-addr: 10.229.196.197:8848
+        #namespace: 072191b8-5bb5-469a-aacb-d557fe28d1e1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    default:
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.154.15.90:1521/eomsdb8
+      username: custcare
+      password: custcare
+#    gis:
+#      driverClassName: org.postgresql.Drplaniver
+#      url: jdbc:postgresql://10.154.38.21:5432/complaint
+#      username: postgres
+#      password: Inspur!23@root
+#    plan:
+#      driverClassName: oracle.jdbc.OracleDriver
+#      url: jdbc:oracle:thin:@10.154.15.90:1521/eomsdb8
+#      username: nscs
+#      password: nscs123#
+    druid:
+      initial-size: 2
+      max-active: 10
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+  redis:
+    #host: 10.154.38.21
+    #port: 6379
+    #password: tszc68
+    # 地址
+    host: 10.154.38.27
+    # 端口，默认为6379
+    port: 6381
+    password:
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 20
+        # 连接池的最大数据库连接数
+        max-active: 50
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+path:
+  excelBasePath: /home/tmn/Inspur/apps/nocc/back-end/upload
+## 生产环境配置==开发环境和生产环境不同的配置写在这里==

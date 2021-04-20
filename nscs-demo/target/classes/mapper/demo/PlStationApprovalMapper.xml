@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.demo.dao.PlStationApprovalDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.demo.domain.PlStationApprovalDO">
+		<id column="UUID" property="uuid" />
+		<result column="TASK_NAME" property="taskName" />
+		<result column="DURATION_ID" property="durationId" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="DISTRICT_NAME" property="districtName" />
+		<result column="CITY_ID" property="cityId" />
+		<result column="DISTRICT_ID" property="districtId" />
+		<result column="PLAN_STATION" property="planStation" />
+		<result column="LONGITUDE" property="longitude" />
+		<result column="LAITITUDE" property="laititude" />
+		<result column="STATE" property="state" />
+		<result column="SCORE" property="score" />
+		<result column="USER_ANAL_TERMINAL" property="userAnalTerminal" />
+		<result column="USER_ANAL_COMPLAINT" property="userAnalComplaint" />
+		<result column="BUSI_ANAL_USER_STAR" property="busiAnalUserStar" />
+		<result column="BUSI_ANAL_USER_VIP" property="busiAnalUserVip" />
+		<result column="COVER_ANAL_SCENE" property="coverAnalScene" />
+		<result column="COVER_ANAL_SIGNAL" property="coverAnalSignal" />
+		<result column="CAPA_ANAL_CAPA_WEIGHT" property="capaAnalCapaWeight" />
+		<result column="CAPA_ANAL_NSTATION_WEIGHT" property="capaAnalNstationWeight" />
+		<result column="NET_STRU_STATION_H" property="netStruStationH" />
+		<result column="NET_STRU_STATION_D" property="netStruStationD" />
+		<result column="ANCHOR_ANAL_COVERAGE" property="anchorAnalCoverage" />
+		<result column="ANCHOR_ANAL_COMPARE" property="anchorAnalCompare" />
+		<result column="PRIORITY" property="priority" />
+		<result column="APPROVAL" property="approval" />
+		<result column="SEND" property="send" />
+		<result column="CREATE_USER" property="createUser" />
+		<result column="ENODB" property="enodb" />
+		<result column="ENODB_ID" property="enodbId" />
+		<result column="MODEL_NAME" property="modelName" />
+		<result column="MODEL_ID" property="modelId" />
+		<result column="REMARK" property="remark" />
+		<result column="UUID" property="uuid" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	TASK_NAME,
+    	DURATION_ID,
+    	CITY_NAME,
+    	DISTRICT_NAME,
+    	CITY_ID,
+    	DISTRICT_ID,
+    	PLAN_STATION,
+    	LONGITUDE,
+    	LAITITUDE,
+    	STATE,
+    	SCORE,
+    	USER_ANAL_TERMINAL,
+    	USER_ANAL_COMPLAINT,
+    	BUSI_ANAL_USER_STAR,
+    	BUSI_ANAL_USER_VIP,
+    	COVER_ANAL_SCENE,
+    	COVER_ANAL_SIGNAL,
+    	CAPA_ANAL_CAPA_WEIGHT,
+    	CAPA_ANAL_NSTATION_WEIGHT,
+    	NET_STRU_STATION_H,
+    	NET_STRU_STATION_D,
+    	ANCHOR_ANAL_COVERAGE,
+    	ANCHOR_ANAL_COMPARE,
+    	PRIORITY,
+    	APPROVAL,
+    	SEND,
+    	CREATE_USER,
+    	ENODB,
+    	ENODB_ID,
+    	MODEL_NAME,
+    	MODEL_ID,
+    	REMARK,
+    	UUID
+    </sql>
+	<select id="getCheckInfo" resultType="map" parameterType="map">
+		select 'TOTAL' as TYPE, count(state) as NUM
+		from PL_STATION_APPROVAL
+		where <![CDATA[ STATE <> '-1'  ]]>
+		<if test="TASK_ID != null and TASK_ID!= ''">
+			and TASK_ID like '%${TASK_ID}%'
+		</if>
+
+		<if test="CITY_ID != null and CITY_ID!= ''">
+			and CITY_ID = ${CITY_ID}
+		</if>
+		<if test="STATE != null and STATE!= ''">
+			and STATE = ${STATE}
+		</if>
+		union
+		select 'APPROVAL' as TYPE, count(state) as NUM
+		from PL_STATION_APPROVAL
+		where <![CDATA[ STATE <> '-1'  ]]>
+		<if test="TASK_ID != null and TASK_ID!= ''">
+			and TASK_ID like '%${TASK_ID}%'
+		</if>
+
+		<if test="CITY_ID != null and CITY_ID!= ''">
+			and CITY_ID = ${CITY_ID}
+		</if>
+		<if test="STATE != null and STATE!= ''">
+			and STATE = ${STATE}
+		</if>
+		and STATE = '2'
+		union
+		select 'PUSH' as TYPE, count(state) as NUM
+		from PL_STATION_APPROVAL
+		where <![CDATA[ STATE <> '-1'  ]]>
+		<if test="TASK_ID != null and TASK_ID!= ''">
+			and TASK_ID like '%${TASK_ID}%'
+		</if>
+
+		<if test="CITY_ID != null and CITY_ID!= ''">
+			and CITY_ID = ${CITY_ID}
+		</if>
+		<if test="STATE != null and STATE!= ''">
+			and STATE = ${STATE}
+		</if>
+		and STATE = '3'
+	</select>
+</mapper>

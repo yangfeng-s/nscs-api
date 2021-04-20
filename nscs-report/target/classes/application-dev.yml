@@ -1,0 +1,44 @@
+## 开发环境配置==开发环境和生产环境不同的配置写在这里
+server:
+  port: 8003
+
+spring:
+  cloud:
+    # nacos 服务注册与发现
+    nacos:
+      discovery:
+        server-addr: 10.154.38.21:8848
+        #namespace: 072191b8-5bb5-469a-aacb-d557fe28d1e1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    default:
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.154.15.90:1521/eomsdb8
+      username: custcare
+      password: custcare
+    gis:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://10.110.74.10:5432/complaint
+      username: postgres
+      password: Inspur!23@root
+    druid:
+      initial-size: 2
+      max-active: 10
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+  redis:
+    host: 10.110.2.26
+    port: 6379
+    password: My_678#
+
+path:
+  excelBasePath: D:\\my
+## 开发环境配置==开发环境和生产环境不同的配置写在这里

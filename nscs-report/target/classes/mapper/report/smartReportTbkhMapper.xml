@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.TbkhDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.TbkhDO">
+		<id column="ID" property="id" />
+		<result column="CITY" property="city" />
+		<result column="MOBILECOMPLAINTS" property="mobilecomplaints" />
+		<result column="MOBILECOMPLAINTSRATE" property="mobilecomplaintsrate" />
+		<result column="HOMECOMPLANINTS" property="homecomplanints" />
+		<result column="HOMECOMPLANINTSRATE" property="homecomplanintsrate" />
+		<result column="INTERNETACCOUNT" property="internetaccount" />
+		<result column="INTERNETRATE" property="internetrate" />
+		<result column="VOLICEACCOUNT" property="voliceaccount" />
+		<result column="VOLICERATE" property="volicerate" />
+		<result column="DXACCOUNT" property="dxaccount" />
+		<result column="CREATETIME" property="createtime" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="DXRATE" property="dxrate" />
+		<result column="MYACCOUNT" property="myaccount" />
+		<result column="MYRATE" property="myrate" />
+		<result column="FOUR" property="four" />
+		<result column="FOURRATE" property="fourrate" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITY,
+    	MOBILECOMPLAINTS,
+    	MOBILECOMPLAINTSRATE,
+    	HOMECOMPLANINTS,
+    	HOMECOMPLANINTSRATE,
+    	INTERNETACCOUNT,
+    	INTERNETRATE,
+    	VOLICEACCOUNT,
+    	VOLICERATE,
+    	DXACCOUNT,
+    	CREATETIME,
+    	TIMEDATE,
+    	DXRATE,
+    	MYACCOUNT,
+    	MYRATE,
+    	FOUR,
+    	FOURRATE
+    </sql>
+
+	<select id="getSmartTbkh" resultType="com.inspur.nscs.report.domain.TbkhDO">
+		select pre.city city,pre.MOBILECOMPLAINTS,round(pre.MOBILECOMPLAINTS/suf.index_value*10000,2) mobilecomplaintsrate,
+             pre.INTERNETACCOUNT INTERNETACCOUNT,round(pre.INTERNETACCOUNT/phone.index_value*10000,2) internetrate,
+             pre.four four,round(pre.four/fourg.index_value*10000,2) fourrate,
+             pre.VOLICEACCOUNT VOLICEACCOUNT,round(pre.VOLICEACCOUNT/speech.index_value*10000,2) VOLICErate,
+             pre.HOMECOMPLANINTS HOMECOMPLANINTS,round(pre.HOMECOMPLANINTS/custom.index_value*10000,2) HOMECOMPLANINTSrate,
+             pre.MYACCOUNT MYACCOUNT,round(pre.MYACCOUNT/wander.index_value * 10000,2) myrate,
+             pre.DXACCOUNT DXACCOUNT,round(pre.DXACCOUNT/mms.index_value * 10000,2) dxrate
+             from (
+             SELECT CITY,
+                    sum(MOBILECOMPLAINTS) MOBILECOMPLAINTS,
+                    sum(INTERNETACCOUNT) INTERNETACCOUNT,
+                    sum(four) four,
+                    sum(VOLICEACCOUNT) VOLICEACCOUNT,
+                    sum(HOMECOMPLANINTS) HOMECOMPLANINTS,
+                    sum(MYACCOUNT) MYACCOUNT,
+                    sum(DXACCOUNT) DXACCOUNT
+             from U_SMART_REPORT_TBKH
+             ${ew.customSqlSegment}
+              GROUP BY city
+              ) pre
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+              )suf
+              on pre.city = suf.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '手机上网客户数'
+              ) phone on pre.city = phone.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '4G上网客户数'
+              ) fourg on pre.city = fourg.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VOLTE注册用户数'
+              ) speech on pre.city = speech.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = '家客客户数'
+              ) custom on pre.city = custom.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+              ) wander on pre.city = wander.city_name
+              left join(
+              select index_value,city_name from smart_view_city where time = to_date('20200301','yyyymmdd')
+              and index_type = 'VLR用户数'
+              ) mms on pre.city = mms.city_name
+              ORDER BY decode(city,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+</mapper>

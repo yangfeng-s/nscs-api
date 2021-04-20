@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/nscs.iml" filepath="$PROJECT_DIR$/nscs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nscs-apn/nscs-apn.iml" filepath="$PROJECT_DIR$/nscs-apn/nscs-apn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nscs-common/nscs-common.iml" filepath="$PROJECT_DIR$/nscs-common/nscs-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nscs-demo/nscs-demo.iml" filepath="$PROJECT_DIR$/nscs-demo/nscs-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nscs-report/nscs-report.iml" filepath="$PROJECT_DIR$/nscs-report/nscs-report.iml" />
+    </modules>
+  </component>
+</project>

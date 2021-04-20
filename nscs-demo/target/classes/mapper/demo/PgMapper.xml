@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.demo.dao.PgDao">
+    <select id="getOrderdetailByGridId" resultType="com.inspur.nscs.demo.domain.Order">
+    select a.* from (
+      select t.*, floor(cast(SMX as numeric)*100000/100)*100||'|'||(floor(cast(SMY as numeric)*100000/100)+1)*100 GRID_ID1
+      from u_wizard_workorder t
+      where 1=1
+      and cast(SMX as numeric)between cast(SUBSTR(#{gridId},0,9) as numeric) *0.00001+(0.00001*100*0.5)-(0.00001*100*0.8)
+     and cast(SUBSTR(#{gridId},0,9) as numeric)*0.00001+(0.00001*100*0.5)+(0.00001*100*0.8)
+      and cast(SMY as numeric)between cast(SUBSTR(#{gridId},10,15)as numeric)*0.00001-(0.00001*100*0.5)-(0.00001*100*0.8)
+    and cast(SUBSTR(#{gridId},10,15)as numeric)*0.00001-(0.00001*100*0.5)+(0.00001*100*0.8)
+    ) a where a.GRID_ID1=#{gridId}
+
+    <if test="startTime != null and startTime != ''">
+        and starttime ::timestamp >= '${startTime} 00:00:00'::timestamp
+    </if>
+    <if test="endTime != null and endTime != ''">
+        and starttime ::timestamp &lt;= '${endTime} 00:00:00'::timestamp
+    </if>
+    </select>
+    <!--and starttime ::timestamp between '2020-08-01 00:00:00'::timestamp  and  '2020-08-08 15:58:48'::timestamp-->
+</mapper>

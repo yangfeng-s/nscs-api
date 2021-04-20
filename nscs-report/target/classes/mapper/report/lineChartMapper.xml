@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.LineChartDao">
+    <select id="getwtb" resultType="com.inspur.nscs.report.domain.LineChart" parameterType="java.util.Map">
+        select t.mobilegeneralization as value,to_char(t.timedate,'YYYY-MM-DD') as time,t.city from u_smart_report_wtb t
+        where 1=1
+        <if test="city!='' and city !=null">
+        and t.city = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="start!='' and start !=null">
+        <![CDATA[
+            and t.timedate >= to_date(#{start,jdbcType=VARCHAR},'yyyy-mm-dd')
+        ]]>
+        </if>
+        <if test="end!='' and end !=null">
+        <![CDATA[
+            and t.timedate <= to_date(#{end,jdbcType=VARCHAR},'yyyy-mm-dd')
+            ]]>
+        </if>
+            order by timedate
+    </select>
+
+    <select id="gettbkh" resultType="com.inspur.nscs.report.domain.LineChart" parameterType="java.util.Map">
+        select t.mobilecomplaints as value ,to_char(t.timedate,'YYYY-MM-DD') as time,t.city from u_smart_report_tbkh t
+        where 1=1
+        <if test="city!='' and city !=null">
+            and t.city = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="start!='' and start !=null">
+            <![CDATA[
+            and t.timedate >= to_date(#{start,jdbcType=VARCHAR},'YYYY-mm-dd')
+        ]]>
+        </if>
+        <if test="end!='' and end !=null">
+            <![CDATA[
+            and t.timedate <= to_date(#{end, jdbdType=VARCHAR},'YYYY-mm-dd')
+            ]]>
+        </if>
+        order by timedate
+    </select>
+
+    <select id="getcfts" resultType="com.inspur.nscs.report.domain.LineChart" parameterType="java.util.Map">
+        select round(mobilerepeatedcomplaints * 100/mobilecomplaints,2) || '%' as value ,to_char(t.timedate,'YYYY-MM-DD') as time,t.city from u_smart_report_cfts t
+        where 1=1
+        <if test="city!='' and city !=null">
+            and t.city = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="start!='' and start !=null">
+            <![CDATA[
+            and t.timedate >= to_data(#{start,jdbcType=VARCHAR},'YYYY-mm-dd')
+        ]]>
+        </if>
+        <if test="end!='' and end !=null">
+            <![CDATA[
+                and t.timedate <= to_date(#{end, jdbdType=VARCHAR},'YYYY-mm-dd')
+            ]]>
+        </if>
+        order by timedate
+    </select>
+
+    <select id="getcftskh" resultType="com.inspur.nscs.report.domain.LineChart" parameterType="java.util.Map">
+        select round(mobilerepeatedcomplaints * 100/mobilecomplaints,2)|| '%' as value,to_char(t.timedate,'YYYY-MM-DD') as time,t.city from u_smart_report_cftskh t
+        where 1=1
+        <if test="city!='' and city !=null">
+            and t.city = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="start!='' and start !=null">
+            <![CDATA[
+            and t.timedate >= to_data(#{start,jdbcType=VARCHAR},'YYYY-mm-dd')
+        ]]>
+        </if>
+        <if test="end!='' and end !=null">
+            <![CDATA[
+                and t.timedate <= to_date(#{end, jdbdType=VARCHAR},'YYYY-mm-dd')
+            ]]>
+        </if>
+        order by timedate
+    </select>
+
+    <select id="gettsl" resultType="com.inspur.nscs.report.domain.LineChart" parameterType="java.util.Map">
+        select t.mobilecomplaintvolume as value,to_char(t.timedate,'YYYY-MM-DD') as time,t.city from u_smart_report_tsl t
+        where 1=1
+        <if test="city!='' and city !=null">
+            and t.city = #{city,jdbcType=VARCHAR}
+        </if>
+        <if test="start!='' and start !=null">
+            <![CDATA[
+            and t.timedate >= to_date(#{start,jdbcType=VARCHAR},'yyyy-mm-dd')
+        ]]>
+        </if>
+        <if test="end!='' and end !=null">
+            <![CDATA[
+            and t.timedate <= to_date(#{end,jdbcType=VARCHAR},'yyyy-mm-dd')
+            ]]>
+        </if>
+        order by timedate
+    </select>
+</mapper>

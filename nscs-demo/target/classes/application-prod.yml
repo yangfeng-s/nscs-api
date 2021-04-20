@@ -1,0 +1,67 @@
+## 生产环境配置==开发环境和生产环境不同的配置写在这里==
+server:
+  port: 8001
+
+spring:
+  cloud:
+    # nacos 服务注册与发现
+    nacos:
+      discovery:
+        server-addr: 10.229.196.197:8848
+        #namespace: 072191b8-5bb5-469a-aacb-d557fe28d1e1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    default:
+      driverClassName: oracle.jdbc.OracleDriver
+      url: jdbc:oracle:thin:@10.154.15.90:1521/eomsdb8
+      username: nscs
+      password: nscs123#
+    gis:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://10.229.196.200:5432/complaint
+      username: postgres
+      password: Inspur!23@root
+#    plan:
+#      driverClassName: oracle.jdbc.OracleDriver
+#      url: jdbc:oracle:thin:@10.154.14.84:1521/nwom
+#      username: nwom
+#      password: Nwom_0ssd
+    druid:
+      initial-size: 2
+      max-active: 10
+      min-idle: 2
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+  redis:
+    host: 10.154.38.21
+    port: 6379
+    password: tszc68
+
+path:
+  excelBasePath: /nwom/Inspur/apps/nscs/back-end/upload
+anon:
+  urls:
+    - /plStationApproval/**
+    - /plTaskManage/**
+    - /**/**
+    - /**
+
+file:
+  mgr:
+    enable: false
+    ssh-host: 10.159.176.40
+    ssh-port: 22
+    ssh-user: iscdtdf
+    ssh-pass: Ua!Ysc20@
+    dest-path: /data/webdav/iscdtdf/wlzc/
+    ws-url: http://10.154.52.155:9080/webDataService/api?wsdl
+    service-id: hn_wlzc
+    token: 6e7606446b2741bbbf26a4790f023066
+## 生产环境配置==开发环境和生产环境不同的配置写在这里==

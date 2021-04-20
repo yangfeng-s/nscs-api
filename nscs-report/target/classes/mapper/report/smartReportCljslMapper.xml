@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.CljslDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.CljslDO">
+		<id column="ID" property="id" />
+		<result column="CITYNAME" property="cityname" />
+		<result column="SUMM" property="summ" />
+		<result column="SUMMFZ" property="summfz" />
+		<result column="ZB12" property="zb12" />
+		<result column="ZB8" property="zb8" />
+		<result column="SUMM8" property="summ8" />
+		<result column="SUMMFZ8" property="summfz8" />
+		<result column="SUMMS" property="summs" />
+		<result column="SUMMFZS" property="summfzs" />
+		<result column="ZBS" property="zbs" />
+		<result column="TIMEDATE" property="timedate" />
+		<result column="CREATETIMR" property="createtimr" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	CITYNAME,
+    	SUMM,
+    	SUMMFZ,
+    	ZB12,
+    	ZB8,
+    	SUMM8,
+    	SUMMFZ8,
+    	SUMMS,
+    	SUMMFZS,
+    	ZBS,
+    	TIMEDATE,
+    	CREATETIMR
+    </sql>
+
+	<select id="getSmartCljsl" resultType="com.inspur.nscs.report.domain.CljslDO">
+		select total.cityname, total.summfz, total.summ, to_char(nvl(round(total.summfz * 100/nullif(total.summ,0),2),0),'990.00')||'%' zb12,
+             total.summfz8, total.summ8, to_char(nvl(round(total.summfz8 * 100/nullif(total.summ8,0),2),0),'990.00')||'%' zb8,
+             total.summfzs, total.summs, to_char(nvl(round(total.summfzs * 100/nullif(total.summs,0),2),0),'990.00')||'%' zbs
+             from (select
+             cityname,
+             sum(summ) summ,
+             sum(summfz) summfz,
+             sum(summ8) summ8,
+             sum(summfz8) summfz8,
+             sum(summs) summs,
+             sum(summfzs) summfzs
+             from u_smart_report_cljsl
+             ${ew.customSqlSegment}
+             group by cityname)
+             total
+             ORDER BY decode(cityname,
+                              '全省',
+                              15,
+                              '长沙',
+                              1,
+                              '株洲',
+                              3,
+                              '湘潭',
+                              2,
+                              '衡阳',
+                              4,
+                              '郴州',
+                              5,
+                              '常德',
+                              6,
+                              '益阳',
+                              7,
+                              '娄底',
+                              8,
+                              '邵阳',
+                              9,
+                              '岳阳',
+                              10,
+                              '自治州',
+                              11,
+                              '张家界',
+                              12,
+                              '怀化',
+                              13,
+                              '永州',
+                              14)
+	</select>
+</mapper>

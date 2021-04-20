@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.inspur.nscs.report.dao.Kf001hDao">
+	<resultMap id="BaseResultMap" type="com.inspur.nscs.report.domain.Kf001hDO">
+		<id column="ID" property="id" />
+		<result column="WORKFORM_ID" property="workformId" />
+		<result column="AREA_NAME" property="areaName" />
+		<result column="CITY_NAME" property="cityName" />
+		<result column="CUST_MOBILE_NUM" property="custMobileNum" />
+		<result column="TOPIC_NAME" property="topicName" />
+		<result column="SECONDARY_CONFIRMATION" property="secondaryConfirmation" />
+		<result column="SECONDARY_CONFIRMATION_2" property="secondaryConfirmation2" />
+		<result column="SECONDARY_CONFIRMATION_3" property="secondaryConfirmation3" />
+		<result column="SECONDARY_CONFIRMATION_4" property="secondaryConfirmation4" />
+		<result column="SECONDARY_CONFIRMATION_5" property="secondaryConfirmation5" />
+		<result column="SECONDARY_CONFIRMATION_6" property="secondaryConfirmation6" />
+		<result column="SECONDARY_CONFIRMATION_7" property="secondaryConfirmation7" />
+		<result column="ISUP" property="isup" />
+		<result column="BUSI_TYPE" property="busiType" />
+		<result column="BUSI_TYPE_2" property="busiType2" />
+		<result column="BUSI_TYPE_3" property="busiType3" />
+		<result column="BUSI_TYPE_4" property="busiType4" />
+		<result column="CHANNEL_TYPE_NAME" property="channelTypeName" />
+		<result column="CUST_TYPE" property="custType" />
+		<result column="CUST_NAME" property="custName" />
+		<result column="CUST_BRAND" property="custBrand" />
+		<result column="ACCEPT_TIME" property="acceptTime" />
+		<result column="AUDIT_TIME" property="auditTime" />
+		<result column="HEAR_CONTENT" property="hearContent" />
+		<result column="OPER_INFO" property="operInfo" />
+		<result column="SP_CODE" property="spCode" />
+		<result column="SPCODE1" property="spcode1" />
+		<result column="SP_NAME" property="spName" />
+		<result column="BACK_MONEY" property="backMoney" />
+		<result column="TIMEOUT1" property="timeout1" />
+		<result column="DELAY_COUNT" property="delayCount" />
+		<result column="TD_USER" property="tdUser" />
+		<result column="UP_TO" property="upTo" />
+		<result column="FIRST_DISPATCH_DEPT" property="firstDispatchDept" />
+		<result column="NAME_ID" property="nameId" />
+		<result column="TD_NET_AREA" property="tdNetArea" />
+		<result column="TERMINAL_MODEL" property="terminalModel" />
+		<result column="TERMINAL_TYPE" property="terminalType" />
+		<result column="TERMINAL_COMPANY" property="terminalCompany" />
+		<result column="TERMINAL_STYLE" property="terminalStyle" />
+		<result column="DUTY_DEPT_NAME" property="dutyDeptName" />
+		<result column="DUTY_REASON" property="dutyReason" />
+		<result column="DUTY_REASON1" property="dutyReason1" />
+		<result column="DUTY_REASON2" property="dutyReason2" />
+		<result column="FLAG" property="flag" />
+		<result column="AUDIT_INFO" property="auditInfo" />
+		<result column="GROUP_CUST_NAME" property="groupCustName" />
+		<result column="GROUP_STAFF_NAME" property="groupStaffName" />
+		<result column="AFLAG" property="aflag" />
+		<result column="RESPONDSABLE_FIELD" property="respondsableField" />
+		<result column="OBJECT_RULE" property="objectRule" />
+		<result column="IS_2LINE" property="is2line" />
+		<result column="CONK_ADDRESS" property="conkAddress" />
+		<result column="USER_DISCNT" property="userDiscnt" />
+		<result column="PAY_CHANNEL" property="payChannel" />
+		<result column="SUPPORT_REASON" property="supportReason" />
+		<result column="EXTEND_TYPE" property="extendType" />
+		<result column="DUTY_CAUSE_GRADE" property="dutyCauseGrade" />
+		<result column="DATA_DEAL_CHL" property="dataDealChl" />
+		<result column="COMP_COUNT" property="compCount" />
+		<result column="IS_BLACK" property="isBlack" />
+		<result column="PRE_TREATMENT" property="preTreatment" />
+		<result column="KD_ACCOUNT" property="kdAccount" />
+		<result column="CUSTTOP" property="custtop" />
+		<result column="IS_COUNTRYSIDE" property="isCountryside" />
+		<result column="IS_DEAL" property="isDeal" />
+		<result column="GZ_CITY" property="gzCity" />
+		<result column="CUSTTOP_UPDATE" property="custtopUpdate" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+    	WORKFORM_ID,
+    	AREA_NAME,
+    	CITY_NAME,
+    	CUST_MOBILE_NUM,
+    	TOPIC_NAME,
+    	SECONDARY_CONFIRMATION,
+    	SECONDARY_CONFIRMATION_2,
+    	SECONDARY_CONFIRMATION_3,
+    	SECONDARY_CONFIRMATION_4,
+    	SECONDARY_CONFIRMATION_5,
+    	SECONDARY_CONFIRMATION_6,
+    	SECONDARY_CONFIRMATION_7,
+    	ISUP,
+    	BUSI_TYPE,
+    	BUSI_TYPE_2,
+    	BUSI_TYPE_3,
+    	BUSI_TYPE_4,
+    	CHANNEL_TYPE_NAME,
+    	CUST_TYPE,
+    	CUST_NAME,
+    	CUST_BRAND,
+    	ACCEPT_TIME,
+    	AUDIT_TIME,
+    	HEAR_CONTENT,
+    	OPER_INFO,
+    	SP_CODE,
+    	SPCODE1,
+    	SP_NAME,
+    	BACK_MONEY,
+    	TIMEOUT1,
+    	DELAY_COUNT,
+    	TD_USER,
+    	UP_TO,
+    	FIRST_DISPATCH_DEPT,
+    	NAME_ID,
+    	TD_NET_AREA,
+    	TERMINAL_MODEL,
+    	TERMINAL_TYPE,
+    	TERMINAL_COMPANY,
+    	TERMINAL_STYLE,
+    	DUTY_DEPT_NAME,
+    	DUTY_REASON,
+    	DUTY_REASON1,
+    	DUTY_REASON2,
+    	FLAG,
+    	AUDIT_INFO,
+    	GROUP_CUST_NAME,
+    	GROUP_STAFF_NAME,
+    	AFLAG,
+    	RESPONDSABLE_FIELD,
+    	OBJECT_RULE,
+    	IS_2LINE,
+    	CONK_ADDRESS,
+    	USER_DISCNT,
+    	PAY_CHANNEL,
+    	SUPPORT_REASON,
+    	EXTEND_TYPE,
+    	DUTY_CAUSE_GRADE,
+    	DATA_DEAL_CHL,
+    	COMP_COUNT,
+    	IS_BLACK,
+    	PRE_TREATMENT,
+    	KD_ACCOUNT,
+    	CUSTTOP,
+    	IS_COUNTRYSIDE,
+    	IS_DEAL,
+    	GZ_CITY,
+    	CUSTTOP_UPDATE
+    </sql>
+</mapper>

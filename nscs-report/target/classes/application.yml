@@ -1,0 +1,28 @@
+## ==抽取开发和生产不变的配置写在这里==
+#server:
+#  servlet:
+#    context-path: /${spring.application.name}
+
+spring:
+  profiles:
+    # 默认启用开发配置，生产环境通过jar启动参数指定
+    active: dev
+  application:
+    name: api-report
+  # 默认时间处理
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+
+## MyBatis-Plus
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  global-config:
+    banner: false
+
+logging:
+  level:
+    root: info
+    com.inspur: debug
+
+## ==抽取开发和生产不变的配置写在这里==

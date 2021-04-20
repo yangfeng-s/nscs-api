@@ -1,0 +1,59 @@
+{
+  "groups": [
+    {
+      "name": "file.mgr",
+      "type": "com.inspur.nscs.common.filemgr.MgrProps",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    }
+  ],
+  "properties": [
+    {
+      "name": "file.mgr.dest-path",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps",
+      "defaultValue": false
+    },
+    {
+      "name": "file.mgr.service-id",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.ssh-host",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.ssh-pass",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.ssh-port",
+      "type": "java.lang.Integer",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps",
+      "defaultValue": 0
+    },
+    {
+      "name": "file.mgr.ssh-user",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.token",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    },
+    {
+      "name": "file.mgr.ws-url",
+      "type": "java.lang.String",
+      "sourceType": "com.inspur.nscs.common.filemgr.MgrProps"
+    }
+  ],
+  "hints": []
+}
